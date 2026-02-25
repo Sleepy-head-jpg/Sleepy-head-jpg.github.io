@@ -1,0 +1,187 @@
+/* ============================================================
+   about.css — styles specific to the About page
+   The main style.css handles shared elements (nav, footer, etc.)
+   This file only adds what's unique to this page
+   ============================================================ */
+
+/* Page header — used across all inner pages */
+.page-header {
+  padding: 5rem 2rem 3rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(92,74,50,0.15);
+  margin-bottom: 4rem;
+}
+
+.page-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--forest);
+  font-weight: 400;
+  margin-top: 0.5rem;
+  line-height: 1.2;
+}
+
+.page-header h1 em {
+  color: var(--earth);
+}
+
+/* Two-column layout: sidebar + main text */
+.about-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ---- Sidebar ---- */
+.about-sidebar {
+  position: sticky; /* sidebar stays in view as you scroll the main text */
+  top: calc(var(--nav-height) + 2rem);
+}
+
+.about-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4; /* portrait orientation */
+  background: var(--parchment);
+  border: 1px solid rgba(92,74,50,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.photo-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--mist);
+  letter-spacing: 0.08em;
+}
+
+.about-quick {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quick-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid rgba(92,74,50,0.1);
+  padding-bottom: 0.75rem;
+}
+
+.quick-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+/* ---- Main Text ---- */
+.about-text {
+  max-width: 640px;
+}
+
+.about-lead {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--forest);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #3a3a3a;
+  line-height: 1.8;
+}
+
+.about-quote {
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.5rem;
+  margin: 2.5rem 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--earth);
+  background: var(--parchment);
+}
+
+.inline-link {
+  color: var(--earth);
+  border-bottom: 1px solid currentColor;
+  transition: color 0.2s;
+}
+
+.inline-link:hover { color: var(--forest); }
+
+/* ---- Updates (Akshay-style) ---- */
+.updates-section {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(92,74,50,0.15);
+}
+
+.updates-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--forest);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.updates-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.updates-list li {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #444;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(92,74,50,0.08);
+}
+
+.update-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--mist);
+  letter-spacing: 0.05em;
+  padding-top: 0.15rem;
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-sidebar {
+    position: static;
+  }
+
+  .about-photo-placeholder {
+    max-width: 240px;
+  }
+
+  .updates-list li {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
