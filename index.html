@@ -3,17 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sandeep Kumar — Ecologist & Naturalist</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Sandeep Kumar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --forest:#2C3B2D;--earth:#5C4A32;--moss:#7A8C6E;--cream:#F4F0E6;
+      --parchment:#EDE8D8;--ink:#1E1E1E;--mist:#9CA89C;--gold:#C4922A;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Source Serif 4',Georgia,serif;
+      --font-mono:'DM Mono',monospace;
+      --max-width:1100px;--nav-height:64px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{background-color:var(--cream);color:var(--ink);font-family:var(--font-body);font-weight:300;line-height:1.75;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    #navbar{position:sticky;top:0;z-index:100;height:var(--nav-height);background:rgba(244,240,230,0.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(92,74,50,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+    .nav-name{font-family:var(--font-display);font-size:1.1rem;color:var(--forest);letter-spacing:0.02em}
+    .nav-links{list-style:none;display:flex;gap:2rem}
+    .nav-links a{font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--earth);transition:color .2s;padding-bottom:2px;border-bottom:1px solid transparent}
+    .nav-links a:hover,.nav-links a.active{color:var(--forest);border-bottom-color:var(--forest)}
+    .nav-toggle{display:none;cursor:pointer;font-size:1.4rem;color:var(--forest)}
+
+    .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a2e1b 0%,#2C3B2D 30%,#3d5c3f 55%,#4a6b4c 70%,#5C4A32 100%)}
+    .hero-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 70% 40%,rgba(122,140,110,0.2) 0%,transparent 60%),radial-gradient(circle at 20% 80%,rgba(92,74,50,0.25) 0%,transparent 50%)}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.62) 0%,rgba(0,0,0,0.2) 60%,rgba(0,0,0,0.05) 100%)}
+    .hero-content{position:relative;z-index:2;padding:0 4rem;max-width:680px;animation:fadeUp 1s ease both}
+    .hero-eyebrow{font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+    .hero-title{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5rem);color:white;line-height:1.1;margin-bottom:0.5rem}
+    .hero-title em{font-style:italic;color:#c8ddb0}
+    .hero-sub{font-size:1.15rem;color:rgba(255,255,255,0.72);margin-bottom:2rem;font-style:italic}
+    .hero-roles{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;color:rgba(255,255,255,0.55);margin-bottom:2.5rem}
+    .dot{color:var(--gold)}
+    .hero-cta{display:inline-block;padding:0.75rem 1.75rem;border:1px solid rgba(255,255,255,0.45);color:white;font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;transition:all .3s ease}
+    .hero-cta:hover{background:white;color:var(--forest)}
+    .hero-scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;color:rgba(255,255,255,0.35);animation:bounce 2s infinite}
+
+    section{padding:6rem 2rem;max-width:var(--max-width);margin:0 auto}
+    .section-label{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mist);margin-bottom:0.75rem}
+    .section-header{margin-bottom:3rem}
+    .section-header h2{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);color:var(--forest);font-weight:400;font-style:italic}
+    .section-footer{margin-top:3rem;text-align:center}
+    .text-link{font-family:var(--font-mono);font-size:0.82rem;letter-spacing:0.08em;color:var(--earth);border-bottom:1px solid currentColor;padding-bottom:2px;transition:color .2s}
+    .text-link:hover{color:var(--forest)}
+
+    .currently{background:var(--parchment);border-top:1px solid rgba(92,74,50,0.15);border-bottom:1px solid rgba(92,74,50,0.15);max-width:100%;padding:4rem 2rem}
+    .currently-inner{max-width:var(--max-width);margin:0 auto}
+    .currently-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:1.5rem}
+    .currently-item{display:flex;gap:1rem;align-items:flex-start}
+    .currently-icon{font-size:1.4rem;margin-top:0.1rem}
+    .currently-item strong{font-family:var(--font-display);font-size:1rem;color:var(--forest);display:block;margin-bottom:0.25rem}
+    .currently-item p{font-size:0.9rem;color:#555;line-height:1.6}
+
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+    .project-card{display:block;border:1px solid rgba(92,74,50,0.15);overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;background:var(--parchment)}
+    .project-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(44,59,45,0.12)}
+    .project-img{height:200px;background-size:cover;background-position:center}
+    .project-img-1{background:linear-gradient(135deg,#3d5c3f,#6b8c6d)}
+    .project-img-2{background:linear-gradient(135deg,#2c4a6e,#5c8aa0)}
+    .project-img-3{background:linear-gradient(135deg,#5c4a32,#8c6e4a)}
+    .project-info{padding:1.5rem}
+    .project-tag{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--mist);text-transform:uppercase;display:block;margin-bottom:0.5rem}
+    .project-info h3{font-family:var(--font-display);font-size:1.2rem;color:var(--forest);margin-bottom:0.5rem;font-weight:400}
+    .project-info p{font-size:0.88rem;color:#666;line-height:1.65}
+
+    .latest-anecdote{background:var(--forest);max-width:100%;padding:6rem 2rem}
+    .anecdote-inner{max-width:720px;margin:0 auto;text-align:center}
+    .latest-anecdote .section-label{color:rgba(255,255,255,0.4)}
+    .anecdote-quote{font-family:var(--font-display);font-size:clamp(1.2rem,2.5vw,1.8rem);font-style:italic;color:white;line-height:1.55;margin:1.5rem 0 1rem;position:relative}
+    .anecdote-quote::before{content:'\201C';font-size:5rem;color:rgba(196,146,42,0.3);position:absolute;top:-1.5rem;left:-1rem;font-family:var(--font-display);line-height:1}
+    .anecdote-meta{font-family:var(--font-mono);font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:2rem}
+    .latest-anecdote .text-link{color:var(--gold);border-bottom-color:var(--gold)}
+
+    footer{background:var(--ink);color:rgba(255,255,255,0.7);padding:3rem 2rem 1.5rem}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.1)}
+    .footer-left strong{font-family:var(--font-display);font-size:1.1rem;color:white;display:block;margin-bottom:0.25rem}
+    .footer-left p{font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.05em}
+    .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+    .footer-links a{font-family:var(--font-mono);font-size:0.78rem;color:rgba(255,255,255,0.5);letter-spacing:0.08em;transition:color .2s}
+    .footer-links a:hover{color:white}
+    .footer-bottom{max-width:var(--max-width);margin:1.5rem auto 0;font-family:var(--font-mono);font-size:0.7rem;color:rgba(255,255,255,0.3);text-align:center}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+    .fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:768px){
+      .nav-links{display:none;position:absolute;top:var(--nav-height);left:0;right:0;background:var(--cream);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem;border-bottom:1px solid rgba(92,74,50,0.15)}
+      .nav-links.open{display:flex}
+      .nav-toggle{display:block}
+      .hero-content{padding:0 1.5rem}
+      section{padding:4rem 1.5rem}
+      .footer-inner{flex-direction:column}
+    }
+  </style>
 </head>
 <body>
-
-  <!-- ===================== NAVIGATION ===================== -->
-  <!-- Think of this like the spine of your field notebook — always visible, always oriented -->
   <nav id="navbar">
     <div class="nav-name">Sandeep Kumar</div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="fieldwork.html">Field Work</a></li>
@@ -24,22 +117,15 @@
     <div class="nav-toggle" id="navToggle">☰</div>
   </nav>
 
-  <!-- ===================== HERO SECTION ===================== -->
-  <!-- This is the first thing visitors see. Like the cover of a field journal.
-       The overlay-text sits ON TOP of a full-screen nature photo -->
   <section class="hero">
-    <!-- REPLACE this gradient with your own best nature photo:
-         style="background-image: url('images/your-photo.jpg')"  -->
     <div class="hero-bg"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">Field Notes from the Himalayas</p>
       <h1 class="hero-title">I follow birds<br><em>into forests</em></h1>
       <p class="hero-sub">to understand how nature builds community.</p>
       <div class="hero-roles">
-        <span>Ecologist</span>
-        <span class="dot">·</span>
-        <span>Naturalist</span>
-        <span class="dot">·</span>
+        <span>Ecologist</span><span class="dot">·</span>
+        <span>Naturalist</span><span class="dot">·</span>
         <span>Photographer</span>
       </div>
       <a href="about.html" class="hero-cta">Enter the journal →</a>
@@ -47,45 +133,32 @@
     <div class="hero-scroll-hint">scroll ↓</div>
   </section>
 
-  <!-- ===================== CURRENTLY SECTION ===================== -->
-  <!-- Inspired by Akshay's "Updates" section — keeps the site feeling ALIVE.
-       Update this every few months with what you're doing right now. -->
-  <section class="currently">
-    <div class="section-label">Currently</div>
-    <div class="currently-grid">
-      <div class="currently-item">
-        <span class="currently-icon">🔬</span>
-        <div>
-          <strong>Researching</strong>
-          <p>Himalayan mixed-species flock dynamics — how birds from different species move and communicate as a community.</p>
+  <div class="currently">
+    <div class="currently-inner">
+      <div class="section-label">Currently</div>
+      <div class="currently-grid">
+        <div class="currently-item">
+          <span class="currently-icon">🔬</span>
+          <div><strong>Researching</strong><p>Himalayan mixed-species flock dynamics — how birds from different species move and communicate as a community.</p></div>
         </div>
-      </div>
-      <div class="currently-item">
-        <span class="currently-icon">📍</span>
-        <div>
-          <strong>Based in</strong>
-          <p>Uttarakhand, India — deep in the oak-rhododendron forests.</p>
+        <div class="currently-item">
+          <span class="currently-icon">📍</span>
+          <div><strong>Based in</strong><p>Uttarakhand, India — deep in the oak-rhododendron forests.</p></div>
         </div>
-      </div>
-      <div class="currently-item">
-        <span class="currently-icon">📖</span>
-        <div>
-          <strong>Writing about</strong>
-          <p>The surprisingly democratic politics of a mixed flock — who leads, who follows, and why.</p>
+        <div class="currently-item">
+          <span class="currently-icon">📖</span>
+          <div><strong>Writing about</strong><p>The surprisingly democratic politics of a mixed flock — who leads, who follows, and why.</p></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ===================== FEATURED WORK ===================== -->
-  <!-- Three project cards that link to your full Field Work page -->
   <section class="featured-work">
     <div class="section-header">
       <div class="section-label">Selected Work</div>
       <h2>Questions I've been asking the forest</h2>
     </div>
     <div class="projects-grid">
-
       <a href="fieldwork.html" class="project-card">
         <div class="project-img project-img-1"></div>
         <div class="project-info">
@@ -94,7 +167,6 @@
           <p>How do birds of different species flock together — and what does it reveal about forest health?</p>
         </div>
       </a>
-
       <a href="fieldwork.html" class="project-card">
         <div class="project-img project-img-2"></div>
         <div class="project-info">
@@ -103,7 +175,6 @@
           <p>Using satellite data and GIS to locate habitat corridors invisible to the naked eye.</p>
         </div>
       </a>
-
       <a href="fieldwork.html" class="project-card">
         <div class="project-img project-img-3"></div>
         <div class="project-info">
@@ -112,28 +183,24 @@
           <p>Six months studying how prey species respond to predator presence — and to each other.</p>
         </div>
       </a>
-
     </div>
     <div class="section-footer">
       <a href="fieldwork.html" class="text-link">See all field work →</a>
     </div>
   </section>
 
-  <!-- ===================== LATEST ANECDOTE ===================== -->
-  <!-- A taste of your field journal — like Kavish's blog style -->
-  <section class="latest-anecdote">
+  <div class="latest-anecdote">
     <div class="anecdote-inner">
       <div class="section-label">Latest from the Field</div>
       <blockquote class="anecdote-quote">
-        "The flock moved like a single organism — forty birds, twelve species, 
+        "The flock moved like a single organism — forty birds, twelve species,
         one collective intelligence weaving through the canopy..."
       </blockquote>
       <p class="anecdote-meta">— from <em>The Democracy of the Canopy</em>, March 2025</p>
       <a href="anecdotes.html" class="text-link">Read the field notes →</a>
     </div>
-  </section>
+  </div>
 
-  <!-- ===================== FOOTER ===================== -->
   <footer>
     <div class="footer-inner">
       <div class="footer-left">
@@ -141,15 +208,33 @@
         <p>Master's student · Ecologist · Naturalist · Photographer</p>
       </div>
       <div class="footer-links">
-        <a href="/cdn-cgi/l/email-protection#166f79636456737b777f7a3875797b">Email</a>
+        <a href="mailto:your@email.com">Email</a>
         <a href="#">eBird</a>
         <a href="#">Instagram</a>
         <a href="#">Google Scholar</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      Built with curiosity, hosted free on GitHub Pages.
-    </div>
+    <div class="footer-bottom">Built with curiosity, hosted free on GitHub Pages.</div>
   </footer>
 
-  <script data-c
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      toggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.project-card, .currently-item, .section-header, .anecdote-inner').forEach((el, i) => {
+      el.classList.add('fade-in');
+      el.style.transitionDelay = `${i * 0.08}s`;
+      observer.observe(el);
+    });
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+    });
+  </script>
+</body>
+</html>
