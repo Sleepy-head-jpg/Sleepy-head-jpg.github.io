@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sandeep Kumar</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -21,6 +21,7 @@
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
 
+    /* NAV */
     #navbar{position:sticky;top:0;z-index:100;height:var(--nav-height);background:rgba(244,240,230,0.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(92,74,50,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
     .nav-name{font-family:var(--font-display);font-size:1.1rem;color:var(--forest);letter-spacing:0.02em}
     .nav-links{list-style:none;display:flex;gap:2rem}
@@ -28,29 +29,39 @@
     .nav-links a:hover,.nav-links a.active{color:var(--forest);border-bottom-color:var(--forest)}
     .nav-toggle{display:none;cursor:pointer;font-size:1.4rem;color:var(--forest)}
 
+    /* HERO — full screen field photo */
     .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a2e1b 0%,#2C3B2D 30%,#3d5c3f 55%,#4a6b4c 70%,#5C4A32 100%)}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a2e1b 0%,#2C3B2D 30%,#3d5c3f 55%,#4a6b4c 70%,#5C4A32 100%);background-size:cover;background-position:center}
+    /* ADD YOUR FIELD PHOTO: replace the background above with:
+       background-image: url('your-photo.jpg'); background-size:cover; background-position:center; */
     .hero-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 70% 40%,rgba(122,140,110,0.2) 0%,transparent 60%),radial-gradient(circle at 20% 80%,rgba(92,74,50,0.25) 0%,transparent 50%)}
-    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.62) 0%,rgba(0,0,0,0.2) 60%,rgba(0,0,0,0.05) 100%)}
-    .hero-content{position:relative;z-index:2;padding:0 4rem;max-width:680px;animation:fadeUp 1s ease both}
-    .hero-eyebrow{font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-    .hero-title{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5rem);color:white;line-height:1.1;margin-bottom:0.5rem}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.25) 55%,rgba(0,0,0,0.05) 100%)}
+    .hero-content{position:relative;z-index:2;padding:0 4rem;max-width:660px;animation:fadeUp 1s ease both}
+    .hero-eyebrow{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+    .hero-title{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4.2rem);color:white;line-height:1.15;margin-bottom:1.2rem;font-weight:400}
     .hero-title em{font-style:italic;color:#c8ddb0}
-    .hero-sub{font-size:1.15rem;color:rgba(255,255,255,0.72);margin-bottom:2rem;font-style:italic}
-    .hero-roles{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;color:rgba(255,255,255,0.55);margin-bottom:2.5rem}
-    .dot{color:var(--gold)}
-    .hero-cta{display:inline-block;padding:0.75rem 1.75rem;border:1px solid rgba(255,255,255,0.45);color:white;font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;transition:all .3s ease}
+    .hero-body{font-size:1rem;color:rgba(255,255,255,0.78);line-height:1.8;margin-bottom:2rem;max-width:500px}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2.5rem}
+    .hero-tag{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2);padding:0.3rem 0.8rem}
+    .hero-links{display:flex;gap:1rem;flex-wrap:wrap}
+    .hero-cta{display:inline-block;padding:0.7rem 1.6rem;border:1px solid rgba(255,255,255,0.45);color:white;font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.1em;transition:all .3s ease}
     .hero-cta:hover{background:white;color:var(--forest)}
-    .hero-scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;color:rgba(255,255,255,0.35);animation:bounce 2s infinite}
+    .hero-cta.secondary{border-color:rgba(196,146,42,0.6);color:rgba(255,255,255,0.7)}
+    .hero-cta.secondary:hover{background:var(--gold);color:white;border-color:var(--gold)}
+    .hero-scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.15em;color:rgba(255,255,255,0.3);animation:bounce 2s infinite}
 
-    section{padding:6rem 2rem;max-width:var(--max-width);margin:0 auto}
-    .section-label{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mist);margin-bottom:0.75rem}
-    .section-header{margin-bottom:3rem}
-    .section-header h2{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);color:var(--forest);font-weight:400;font-style:italic}
-    .section-footer{margin-top:3rem;text-align:center}
-    .text-link{font-family:var(--font-mono);font-size:0.82rem;letter-spacing:0.08em;color:var(--earth);border-bottom:1px solid currentColor;padding-bottom:2px;transition:color .2s}
-    .text-link:hover{color:var(--forest)}
+    /* INTRO BAND — warm personal text, like Keshav's homepage blurb */
+    .intro-band{background:white;border-bottom:1px solid rgba(92,74,50,0.12);padding:4rem 2rem}
+    .intro-inner{max-width:760px;margin:0 auto}
+    .intro-greeting{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem);color:var(--forest);font-weight:400;margin-bottom:1.25rem;line-height:1.3}
+    .intro-greeting em{font-style:italic;color:var(--earth)}
+    .intro-text{font-size:1rem;color:#444;line-height:1.85;margin-bottom:1rem}
+    .intro-text:last-of-type{margin-bottom:1.75rem}
+    .intro-explore{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.5rem}
+    .explore-chip{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--earth);border-bottom:1px solid var(--earth);padding-bottom:2px;transition:color .2s}
+    .explore-chip:hover{color:var(--forest);border-bottom-color:var(--forest)}
 
+    /* CURRENTLY */
     .currently{background:var(--parchment);border-top:1px solid rgba(92,74,50,0.15);border-bottom:1px solid rgba(92,74,50,0.15);max-width:100%;padding:4rem 2rem}
     .currently-inner{max-width:var(--max-width);margin:0 auto}
     .currently-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:1.5rem}
@@ -59,6 +70,14 @@
     .currently-item strong{font-family:var(--font-display);font-size:1rem;color:var(--forest);display:block;margin-bottom:0.25rem}
     .currently-item p{font-size:0.9rem;color:#555;line-height:1.6}
 
+    /* PROJECTS */
+    section{padding:6rem 2rem;max-width:var(--max-width);margin:0 auto}
+    .section-label{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mist);margin-bottom:0.75rem}
+    .section-header{margin-bottom:3rem}
+    .section-header h2{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);color:var(--forest);font-weight:400;font-style:italic}
+    .section-footer{margin-top:3rem;text-align:center}
+    .text-link{font-family:var(--font-mono);font-size:0.82rem;letter-spacing:0.08em;color:var(--earth);border-bottom:1px solid currentColor;padding-bottom:2px;transition:color .2s}
+    .text-link:hover{color:var(--forest)}
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
     .project-card{display:block;border:1px solid rgba(92,74,50,0.15);overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;background:var(--parchment)}
     .project-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(44,59,45,0.12)}
@@ -71,6 +90,7 @@
     .project-info h3{font-family:var(--font-display);font-size:1.2rem;color:var(--forest);margin-bottom:0.5rem;font-weight:400}
     .project-info p{font-size:0.88rem;color:#666;line-height:1.65}
 
+    /* ANECDOTE */
     .latest-anecdote{background:var(--forest);max-width:100%;padding:6rem 2rem}
     .anecdote-inner{max-width:720px;margin:0 auto;text-align:center}
     .latest-anecdote .section-label{color:rgba(255,255,255,0.4)}
@@ -79,6 +99,7 @@
     .anecdote-meta{font-family:var(--font-mono);font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:2rem}
     .latest-anecdote .text-link{color:var(--gold);border-bottom-color:var(--gold)}
 
+    /* FOOTER */
     footer{background:var(--ink);color:rgba(255,255,255,0.7);padding:3rem 2rem 1.5rem}
     .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.1)}
     .footer-left strong{font-family:var(--font-display);font-size:1.1rem;color:white;display:block;margin-bottom:0.25rem}
@@ -100,10 +121,12 @@
       .hero-content{padding:0 1.5rem}
       section{padding:4rem 1.5rem}
       .footer-inner{flex-direction:column}
+      .intro-explore{gap:1rem}
     }
   </style>
 </head>
 <body>
+
   <nav id="navbar">
     <div class="nav-name">Sandeep Kumar</div>
     <ul class="nav-links" id="navLinks">
@@ -117,22 +140,63 @@
     <div class="nav-toggle" id="navToggle">☰</div>
   </nav>
 
+  <!-- HERO: replace .hero-bg background with your field photo -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Field Notes from the Himalayas</p>
-      <h1 class="hero-title">I follow birds<br><em>into forests</em></h1>
-      <p class="hero-sub">to understand how nature builds community.</p>
-      <div class="hero-roles">
-        <span>Ecologist</span><span class="dot">·</span>
-        <span>Naturalist</span><span class="dot">·</span>
-        <span>Photographer</span>
+      <p class="hero-eyebrow">Jharkhand → Himalayas</p>
+      <h1 class="hero-title">Sandeep Kumar<br><em>naturalist, at large</em></h1>
+      <p class="hero-body">
+        Ecologist by training. Naturalist by instinct. Photographer by necessity —
+        because sometimes a field note isn't enough.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">Community Ecology</span>
+        <span class="hero-tag">Wildlife Photography</span>
+        <span class="hero-tag">Geospatial Analysis</span>
+        <span class="hero-tag">Field Naturalist</span>
+        <span class="hero-tag">Birding</span>
       </div>
-      <a href="about.html" class="hero-cta">Enter the journal →</a>
+      <div class="hero-links">
+        <a href="about.html" class="hero-cta">About me →</a>
+        <a href="anecdotes.html" class="hero-cta secondary">Field notes →</a>
+      </div>
     </div>
     <div class="hero-scroll-hint">scroll ↓</div>
   </section>
 
+  <!-- INTRO: warm personal paragraph, Keshav-style -->
+  <div class="intro-band">
+    <div class="intro-inner">
+      <h2 class="intro-greeting">Hey, thanks for dropping by! <em>Let me tell you a bit about myself.</em></h2>
+      <p class="intro-text">
+        I'm a master's student working on the ecology of Himalayan forests — specifically, 
+        how mixed-species flocks of birds organise themselves and what that tells us about the health 
+        of the ecosystem around them. But honestly, I've always been more naturalist than scientist. 
+        I notice things. A feather, an unfamiliar call, a footprint in the mud. That habit of attention 
+        is what eventually became my research.
+      </p>
+      <p class="intro-text">
+        Outside the research, I bird obsessively, photograph everything that holds still long enough, 
+        and write field notes that don't always fit neatly into a methods section. 
+        The <em>Anecdotes</em> page is where those live.
+      </p>
+      <p class="intro-text">
+        Have a look around — the <strong>Field Work</strong> page has my research projects, 
+        <strong>Through the Lens</strong> has my photography, and the <strong>CV</strong> has the 
+        formal stuff. Or just read the field notes. Those are probably more fun.
+      </p>
+      <div class="intro-explore">
+        <a href="fieldwork.html" class="explore-chip">Research projects →</a>
+        <a href="anecdotes.html" class="explore-chip">Anecdotes →</a>
+        <a href="lens.html" class="explore-chip">Photography →</a>
+        <a href="cv.html" class="explore-chip">CV →</a>
+        <a href="about.html" class="explore-chip">More about me →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CURRENTLY -->
   <div class="currently">
     <div class="currently-inner">
       <div class="section-label">Currently</div>
@@ -153,6 +217,7 @@
     </div>
   </div>
 
+  <!-- PROJECTS -->
   <section class="featured-work">
     <div class="section-header">
       <div class="section-label">Selected Work</div>
@@ -189,6 +254,7 @@
     </div>
   </section>
 
+  <!-- ANECDOTE TEASER -->
   <div class="latest-anecdote">
     <div class="anecdote-inner">
       <div class="section-label">Latest from the Field</div>
@@ -227,9 +293,9 @@
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.project-card, .currently-item, .section-header, .anecdote-inner').forEach((el, i) => {
+    document.querySelectorAll('.project-card, .currently-item, .section-header, .anecdote-inner, .intro-inner').forEach((el, i) => {
       el.classList.add('fade-in');
-      el.style.transitionDelay = `${i * 0.08}s`;
+      el.style.transitionDelay = `${i * 0.07}s`;
       observer.observe(el);
     });
     window.addEventListener('scroll', () => {
