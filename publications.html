@@ -5,203 +5,183 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Publications — Sandeep Kumar</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --forest: #2C3B2D;
-      --earth:  #5C4A32;
-      --cream:  #F4F0E6;
-      --parch:  #EDE8D8;
-      --ink:    #1E1E1E;
-      --mist:   #9CA89C;
-      --gold:   #C4922A;
-      --fd: 'Playfair Display', Georgia, serif;
-      --fb: 'Source Serif 4', Georgia, serif;
+      --bg:     #1e1e1e;
+      --bg2:    #252525;
+      --text:   #d4d4d4;
+      --dim:    #888;
+      --green:  #6db36d;
+      --blue:   #4a90d9;
+      --border: rgba(255,255,255,0.1);
       --fm: 'DM Mono', monospace;
-      --max: 860px;
-      --nav: 64px;
+      --fb: 'Source Serif 4', Georgia, serif;
+      --max: 900px;
+      --nav: 56px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--cream); color: var(--ink); font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: var(--fb); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
 
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
       height: var(--nav);
-      background: rgba(244,240,230,0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(92,74,50,0.15);
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2.5rem;
     }
-    .nav-name { font-family: var(--fd); font-size: 1.05rem; color: var(--forest); }
+    .nav-name { font-family: var(--fb); font-size: 1rem; color: var(--text); }
     .nav-links { list-style: none; display: flex; gap: 1.8rem; }
     .nav-links a {
-      font-family: var(--fm); font-size: 0.74rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--earth);
-      border-bottom: 1px solid transparent; padding-bottom: 2px;
-      transition: color .2s, border-color .2s;
+      font-family: var(--fm); font-size: 0.72rem; letter-spacing: 0.06em;
+      color: var(--dim); transition: color .2s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--forest); border-bottom-color: var(--forest); }
-    .hamburger { display: none; cursor: pointer; font-size: 1.4rem; color: var(--forest); }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--green); }
+    .hamburger { display: none; cursor: pointer; font-size: 1.3rem; color: var(--dim); }
 
-    /* PAGE HEADER */
-    .page-header {
+    /* PAGE */
+    .page {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 4.5rem 2.5rem 3rem;
+      padding: 4rem 2.5rem 6rem;
     }
-    .page-eyebrow {
-      font-family: var(--fm); font-size: 0.7rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 0.75rem;
-    }
+
     .page-title {
-      font-family: var(--fd);
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--forest); font-weight: 400; line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-    .page-title em { font-style: italic; color: var(--earth); }
-
-    /* SCHOLAR BADGE — sits right below the title */
-    .scholar-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: var(--fm); font-size: 0.72rem; letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--forest);
-      border: 1px solid rgba(44,59,45,0.35);
-      padding: 0.4rem 1rem;
-      transition: all .25s ease;
-    }
-    .scholar-badge:hover { background: var(--forest); color: var(--cream); }
-    .scholar-icon { font-size: 1rem; }
-
-    /* DIVIDER */
-    .divider {
-      max-width: var(--max); margin: 0 auto 0;
-      border: none; border-top: 1px solid rgba(92,74,50,0.15);
+      font-family: var(--fb);
+      font-size: 2.2rem; font-weight: 300;
+      color: var(--text);
+      margin-bottom: 2.5rem;
     }
 
-    /* PUB LIST */
-    .pub-list {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 2.5rem 6rem;
-    }
-
-    /* YEAR GROUP HEADER */
-    .year-group { margin-top: 3.5rem; }
-    .year-label {
-      font-family: var(--fm);
-      font-size: 0.72rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--mist);
-      margin-bottom: 1.25rem;
+    /* SECTION HEADING — "Journal Articles" style */
+    .section-heading {
+      font-family: var(--fb);
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--text);
+      margin-bottom: 1.5rem;
       padding-bottom: 0.5rem;
-      border-bottom: 1px solid rgba(92,74,50,0.12);
+      border-bottom: 1px solid var(--border);
     }
 
-    /* SINGLE ENTRY
-       HOW TO ADD A PAPER:
-       Copy one .pub-entry block. Fill in:
-       - .pub-title    → full paper title
-       - .pub-authors  → all authors, wrap your name in <strong>
-       - .pub-journal  → journal in <em>, then details
-       - .pub-links    → add/remove links as needed
-       - .pub-abstract → optional, hidden until clicked
-       Wrap it inside the correct .year-group.
-    */
-    .pub-entry {
-      padding: 1.75rem 0;
-      border-bottom: 1px solid rgba(92,74,50,0.08);
+    /* YEAR + PAPERS LAYOUT — year left, papers right */
+    .year-block {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 2rem;
+      margin-bottom: 0.5rem;
     }
-    .pub-entry:last-child { border-bottom: none; }
 
-    .pub-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.4rem; }
+    .year-num {
+      font-family: var(--fb);
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--text);
+      padding-top: 0.15rem;
+    }
 
-    .pub-badge {
-      flex-shrink: 0;
+    .papers { display: flex; flex-direction: column; }
+
+    /* SINGLE PAPER */
+    .paper {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .papers .paper:last-child { border-bottom: none; }
+
+    .paper-title {
+      font-family: var(--fb);
+      font-size: 1rem; color: var(--text);
+      line-height: 1.45; margin-bottom: 0.3rem;
+    }
+
+    .paper-authors {
+      font-family: var(--fm); font-size: 0.74rem;
+      color: var(--dim); margin-bottom: 0.2rem;
+    }
+    /* underline YOUR name to match Shikhara's style */
+    .paper-authors .me {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .paper-journal {
+      font-family: var(--fm); font-size: 0.74rem;
+      color: var(--dim); font-style: italic;
+      margin-bottom: 0.65rem;
+    }
+
+    /* BUTTON ROW — ABS LINK PDF Scholar */
+    .paper-btns {
+      display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center;
+    }
+
+    /* square outlined buttons like Shikhara */
+    .btn {
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid var(--border);
+      color: var(--dim); background: transparent;
+      cursor: pointer; transition: all .2s;
+      display: inline-block;
+    }
+    .btn:hover { border-color: var(--text); color: var(--text); }
+
+    /* blue Scholar badge — matches Shikhara exactly */
+    .btn-scholar {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: white;
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-weight: 400;
+    }
+    .btn-scholar:hover { background: #3a7bc8; border-color: #3a7bc8; color: white; }
+    .cite-count {
+      background: rgba(0,0,0,0.25);
+      padding: 0 0.35rem;
+      border-radius: 2px;
+      font-size: 0.65rem;
+    }
+
+    /* badge for status */
+    .status-badge {
       font-family: var(--fm); font-size: 0.6rem;
       letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.15rem 0.5rem;
-      border: 1px solid;
-      margin-top: 0.2rem;
+      padding: 0.15rem 0.5rem; border: 1px solid;
+      margin-left: 0.25rem;
     }
-    .badge-published { color: var(--forest); border-color: var(--forest); }
-    .badge-review    { color: var(--gold);   border-color: var(--gold); }
-    .badge-prep      { color: var(--mist);   border-color: var(--mist); }
+    .s-review { color: #c4922a; border-color: #c4922a; }
+    .s-prep   { color: var(--dim); border-color: var(--dim); }
 
-    .pub-title {
-      font-family: var(--fd);
-      font-size: 1.05rem; font-weight: 400;
-      color: var(--ink); line-height: 1.45;
-      flex: 1;
-    }
-
-    .pub-authors {
-      font-family: var(--fm); font-size: 0.74rem;
-      letter-spacing: 0.02em; color: #777;
-      margin-bottom: 0.25rem;
-    }
-    .pub-authors strong { color: var(--ink); font-weight: 500; }
-
-    .pub-journal {
-      font-family: var(--fm); font-size: 0.74rem;
-      color: var(--earth);
-    }
-    .pub-journal em { font-style: italic; }
-
-    .pub-abstract {
-      font-size: 0.88rem; color: #555;
-      line-height: 1.75; margin-top: 0.75rem;
-      padding-left: 1rem;
-      border-left: 2px solid rgba(92,74,50,0.2);
+    /* collapsible abstract */
+    .abstract-box {
       display: none;
+      margin-top: 0.75rem;
+      font-size: 0.88rem; color: #aaa;
+      line-height: 1.75;
+      padding-left: 1rem;
+      border-left: 2px solid rgba(255,255,255,0.12);
     }
-    .pub-abstract.open { display: block; }
-
-    .pub-links {
-      display: flex; gap: 0.75rem;
-      flex-wrap: wrap; margin-top: 0.65rem; align-items: center;
-    }
-    .pub-link {
-      font-family: var(--fm); font-size: 0.67rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--mist);
-      border-bottom: 1px solid currentColor;
-      padding-bottom: 1px;
-      transition: color .2s; cursor: pointer;
-    }
-    .pub-link:hover { color: var(--earth); }
-    .pub-link.scholar {
-      color: var(--forest);
-      display: inline-flex; align-items: center; gap: 0.25rem;
-    }
-    .pub-link.scholar:hover { color: var(--earth); }
-    .pub-link.abstract-btn { color: var(--mist); }
-    .pub-link.abstract-btn.open { color: var(--forest); }
+    .abstract-box.open { display: block; }
 
     /* FOOTER */
-    footer { background: var(--ink); color: rgba(255,255,255,0.6); padding: 3rem 2.5rem 1.5rem; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .footer-name { font-family: var(--fd); font-size: 1rem; color: white; display: block; margin-bottom: 0.25rem; }
-    .footer-sub  { font-family: var(--fm); font-size: 0.7rem; letter-spacing: 0.04em; }
-    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
-    .footer-links a { font-family: var(--fm); font-size: 0.72rem; color: rgba(255,255,255,0.45); transition: color .2s; }
-    .footer-links a:hover { color: white; }
-    .footer-bottom { max-width: 1100px; margin: 1.25rem auto 0; font-family: var(--fm); font-size: 0.65rem; color: rgba(255,255,255,0.22); text-align: center; }
+    footer { background: #161616; color: rgba(255,255,255,0.4); padding: 1.5rem 2.5rem; text-align: center; font-family: var(--fm); font-size: 0.68rem; border-top: 1px solid var(--border); }
+    footer a { color: rgba(255,255,255,0.45); transition: color .2s; margin: 0 0.6rem; }
+    footer a:hover { color: white; }
+    .footer-links { margin-bottom: 0.75rem; }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: var(--cream); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(92,74,50,0.15); }
+    @media (max-width: 640px) {
+      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: var(--bg2); flex-direction: column; padding: 1.25rem 2rem; gap: 1rem; border-bottom: 1px solid var(--border); }
       .nav-links.open { display: flex; }
       .hamburger { display: block; }
-      .page-header { padding: 3rem 1.5rem 2rem; }
-      .pub-list { padding: 0 1.5rem 4rem; }
-      .pub-top { flex-direction: column; gap: 0.4rem; }
-      footer { padding: 2.5rem 1.5rem 1.5rem; }
-      .footer-inner { flex-direction: column; }
+      .year-block { grid-template-columns: 70px 1fr; gap: 0 1rem; }
+      .year-num { font-size: 1.1rem; }
+      .page { padding: 2.5rem 1.25rem 4rem; }
     }
   </style>
 </head>
@@ -221,169 +201,163 @@
     <span class="hamburger" id="ham">☰</span>
   </nav>
 
-  <!-- PAGE HEADER -->
-  <div class="page-header">
-    <p class="page-eyebrow">Research Output</p>
-    <h1 class="page-title">Publications <em>&amp; Manuscripts</em></h1>
-    <!-- SCHOLAR BADGE: replace the href with your real Google Scholar profile URL -->
-    <a href="https://scholar.google.com/citations?user=9P7wjDAAAAAJ&hl=en&authuser=1" target="_blank" class="scholar-badge">
-      <span class="scholar-icon">🎓</span> Google Scholar Profile
-    </a>
-  </div>
+  <div class="page">
 
-  <hr class="divider"/>
+    <h1 class="page-title">Publications</h1>
 
-  <!-- PUBLICATION LIST -->
-  <div class="pub-list">
+    <h2 class="section-heading">Journal Articles</h2>
 
-    <!-- ══ 2025 ══════════════════════════════════════
-         HOW TO ADD A NEW YEAR GROUP:
-         Copy a .year-group block, change the .year-label text,
-         and put your papers inside it.
-    ════════════════════════════════════════════════ -->
-    <div class="year-group">
-      <p class="year-label">2025</p>
+    <!--
+    ══════════════════════════════════════════════
+    HOW TO ADD A PAPER:
 
-      <!-- PAPER 1
-           Replace all placeholder text with your real paper details.
-           Your name goes inside <strong> in .pub-authors.
-           For the Scholar link: find your paper on scholar.google.com,
-           copy the URL, and paste it into the href below.
-      -->
-      <div class="pub-entry">
-        <div class="pub-top">
-          <p class="pub-title">
+    1. Find the right .year-block (or create a new one for a new year)
+    2. Copy one .paper block inside .papers
+    3. Fill in: title, authors (your name in <span class="me">),
+       journal + date, then update button hrefs
+
+    HOW TO ADD A NEW YEAR:
+    Copy the entire .year-block div, change the .year-num text,
+    and put your papers inside .papers
+
+    SCHOLAR BADGE:
+    - Go to scholar.google.com, search your paper title
+    - Copy the URL of your paper's scholar page
+    - Paste it as the href of .btn-scholar
+    - Change the number in .cite-count to your actual citation count
+    - If 0 citations, just put 0
+
+    ABS BUTTON:
+    - Clicking it toggles the abstract text open/closed (JS handles this)
+    - Write your abstract inside the .abstract-box div
+
+    LINK / PDF BUTTONS:
+    - Replace href="#" with the actual DOI link or PDF URL
+    - Remove buttons you don't have links for
+    ══════════════════════════════════════════════
+    -->
+
+    <!-- ── 2025 ── -->
+    <div class="year-block">
+      <span class="year-num">2025</span>
+      <div class="papers">
+
+        <div class="paper">
+          <p class="paper-title">
             Mixed-species flock dynamics in Himalayan oak forests:
             composition, stability, and ecological drivers
           </p>
-          <span class="pub-badge badge-published">Published</span>
+          <p class="paper-authors">
+            <span class="me">Sandeep Kumar</span>, Co-Author Name, Supervisor Name
+          </p>
+          <p class="paper-journal">Journal of Avian Biology, Jan 2025</p>
+          <div class="paper-btns">
+            <span class="btn" onclick="toggleAbs(this)">ABS</span>
+            <a href="#" class="btn">LINK</a>
+            <a href="#" class="btn">PDF</a>
+            <a href="https://scholar.google.com/scholar?q=mixed+species+flock+himalayan" target="_blank" class="btn btn-scholar">
+              🎓 scholar <span class="cite-count">0</span>
+            </a>
+          </div>
+          <div class="abstract-box">
+            Mixed-species flocks are a prominent feature of Himalayan forests.
+            This study examines flock composition and stability across an elevational
+            gradient in the oak belt, finding that nuclear species identity and forest
+            structure are the strongest predictors of flock size and species richness.
+          </div>
         </div>
-        <p class="pub-authors">
-          <strong>Sandeep Kumar</strong>, Co-Author Name, Supervisor Name
-        </p>
-        <p class="pub-journal">
-          <em>Journal of Avian Biology</em> · 2025 · Vol(Issue): pp–pp
-        </p>
-        <div class="pub-links">
-          <a href="#" class="pub-link">PDF</a>
-          <a href="#" class="pub-link">DOI</a>
-          <a href="https://scholar.google.com/scholar?q=your+paper+title" target="_blank" class="pub-link scholar">🎓 Scholar</a>
-          <span class="pub-link abstract-btn" onclick="toggleAbstract(this)">Abstract ↓</span>
-        </div>
-        <p class="pub-abstract">
-          Mixed-species flocks are a prominent feature of Himalayan forests.
-          This study examines flock composition and stability across an elevational gradient
-          in the oak belt, finding that nuclear species identity and forest structure are
-          the strongest predictors of flock size and species richness.
-        </p>
-      </div>
 
+      </div>
     </div>
 
-    <!-- ══ UNDER REVIEW ══════════════════════════════ -->
-    <div class="year-group">
-      <p class="year-label">Under Review</p>
+    <!-- ── Under Review ── -->
+    <div class="year-block" style="margin-top:1rem">
+      <span class="year-num" style="font-size:1rem;color:var(--dim);padding-top:0.4rem">Under<br>Review</span>
+      <div class="papers">
 
-      <div class="pub-entry">
-        <div class="pub-top">
-          <p class="pub-title">
+        <div class="paper">
+          <p class="paper-title">
             Habitat corridor mapping using multi-temporal remote sensing
             in a montane landscape of the western Himalayas
+            <span class="status-badge s-review">Under Review</span>
           </p>
-          <span class="pub-badge badge-review">Under Review</span>
+          <p class="paper-authors">
+            <span class="me">Sandeep Kumar</span>, Supervisor Name
+          </p>
+          <p class="paper-journal">Submitted to Landscape Ecology, 2025</p>
+          <div class="paper-btns">
+            <span class="btn" onclick="toggleAbs(this)">ABS</span>
+            <a href="#" class="btn">PREPRINT</a>
+          </div>
+          <div class="abstract-box">
+            Using multi-temporal Landsat and Sentinel-2 imagery, we delineate
+            functional habitat corridors across a fragmented montane landscape,
+            identifying previously undocumented connectivity hotspots with
+            implications for conservation planning.
+          </div>
         </div>
-        <p class="pub-authors">
-          <strong>Sandeep Kumar</strong>, Supervisor Name
-        </p>
-        <p class="pub-journal">
-          Submitted to <em>Landscape Ecology</em> · 2025
-        </p>
-        <div class="pub-links">
-          <a href="#" class="pub-link">Preprint</a>
-          <span class="pub-link abstract-btn" onclick="toggleAbstract(this)">Abstract ↓</span>
-        </div>
-        <p class="pub-abstract">
-          Using multi-temporal Landsat and Sentinel-2 imagery, we delineate
-          functional habitat corridors across a fragmented montane landscape.
-          The analysis identifies previously undocumented connectivity hotspots
-          with implications for conservation planning.
-        </p>
-      </div>
 
+      </div>
     </div>
 
-    <!-- ══ IN PREPARATION ════════════════════════════ -->
-    <div class="year-group">
-      <p class="year-label">In Preparation</p>
+    <!-- ── In Preparation ── -->
+    <div class="year-block" style="margin-top:1rem">
+      <span class="year-num" style="font-size:1rem;color:var(--dim);padding-top:0.4rem">In<br>Prep</span>
+      <div class="papers">
 
-      <div class="pub-entry">
-        <div class="pub-top">
-          <p class="pub-title">
-            Sentinel species and information cascades in Himalayan
-            mixed-species bird flocks
+        <div class="paper">
+          <p class="paper-title">
+            Sentinel species and information cascades in Himalayan mixed-species bird flocks
+            <span class="status-badge s-prep">In Prep</span>
           </p>
-          <span class="pub-badge badge-prep">In Prep</span>
-        </div>
-        <p class="pub-authors">
-          <strong>Sandeep Kumar</strong>, Supervisor Name
-        </p>
-        <p class="pub-journal" style="color:var(--mist)">
-          Target: <em>Behavioral Ecology</em>
-        </p>
-      </div>
-
-      <div class="pub-entry">
-        <div class="pub-top">
-          <p class="pub-title">
-            Resource partitioning and foraging niche breadth in co-flocking
-            insectivores of the Himalayan mid-hills
+          <p class="paper-authors">
+            <span class="me">Sandeep Kumar</span>, Supervisor Name
           </p>
-          <span class="pub-badge badge-prep">In Prep</span>
+          <p class="paper-journal" style="font-style:normal">Target: <em>Behavioral Ecology</em></p>
         </div>
-        <p class="pub-authors">
-          <strong>Sandeep Kumar</strong>, Co-Author Name, Supervisor Name
-        </p>
-        <p class="pub-journal" style="color:var(--mist)">
-          Target: <em>Ornithology</em>
-        </p>
-      </div>
 
+        <div class="paper">
+          <p class="paper-title">
+            Resource partitioning and foraging niche breadth in co-flocking insectivores
+            of the Himalayan mid-hills
+            <span class="status-badge s-prep">In Prep</span>
+          </p>
+          <p class="paper-authors">
+            <span class="me">Sandeep Kumar</span>, Co-Author Name, Supervisor Name
+          </p>
+          <p class="paper-journal" style="font-style:normal">Target: <em>Ornithology</em></p>
+        </div>
+
+      </div>
     </div>
 
-  </div><!-- end pub-list -->
+  </div><!-- end .page -->
 
   <footer>
-    <div class="footer-inner">
-      <div>
-        <span class="footer-name">Sandeep Kumar</span>
-        <span class="footer-sub">Ecologist · Naturalist · Photographer</span>
-      </div>
-      <div class="footer-links">
-        <a href="mailto:sk21ms053@iiserkol.ac.in">✉ Email</a>
-        <a href="https://ebird.org/profile/MTk1NzE3OQ/world" target="_blank">🐦 eBird</a>
-        <a href="https://www.instagram.com/ig_sandeep.3/" target="_blank">📷 Instagram</a>
-        <a href="https://x.com/IgnoramusNWords" target="_blank">𝕏 Twitter</a>
-      </div>
+    <div class="footer-links">
+      <a href="mailto:sk21ms053@iiserkol.ac.in">✉ Email</a>
+      <a href="https://ebird.org/profile/MTk1NzE3OQ/world" target="_blank">🐦 eBird</a>
+      <a href="https://www.instagram.com/ig_sandeep.3/" target="_blank">📷 Instagram</a>
+      <a href="https://x.com/IgnoramusNWords" target="_blank">𝕏 Twitter</a>
     </div>
-    <p class="footer-bottom">Built with curiosity · Hosted free on GitHub Pages</p>
+    © Sandeep Kumar · Built with curiosity · Hosted free on GitHub Pages
   </footer>
 
   <script>
+    // Mobile nav
     const ham = document.getElementById('ham');
     const nl  = document.getElementById('navLinks');
     ham.addEventListener('click', () => {
       nl.classList.toggle('open');
       ham.textContent = nl.classList.contains('open') ? '✕' : '☰';
     });
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').style.boxShadow =
-        scrollY > 40 ? '0 2px 18px rgba(0,0,0,0.07)' : 'none';
-    });
-    function toggleAbstract(btn) {
-      const abstract = btn.closest('.pub-entry').querySelector('.pub-abstract');
-      const open = abstract.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.textContent = open ? 'Abstract ↑' : 'Abstract ↓';
+
+    // Abstract toggle
+    function toggleAbs(btn) {
+      const box = btn.closest('.paper').querySelector('.abstract-box');
+      const open = box.classList.toggle('open');
+      btn.style.borderColor = open ? 'var(--text)' : '';
+      btn.style.color       = open ? 'var(--text)' : '';
     }
   </script>
 </body>
