@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Through the Lens — Sandeep Kumar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --forest: #2C3B2D;
+      --earth:  #5C4A32;
+      --cream:  #F4F0E6;
+      --parch:  #EDE8D8;
+      --ink:    #1E1E1E;
+      --mist:   #9CA89C;
+      --gold:   #C4922A;
+      --fd: 'Playfair Display', Georgia, serif;
+      --fb: 'Source Serif 4', Georgia, serif;
+      --fm: 'DM Mono', monospace;
+      --max: 1200px;
+      --nav: 64px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink); color: #ccc; font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav);
+      background: rgba(30,30,30,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .nav-name { font-family: var(--fd); font-size: 1.05rem; color: #ddd; }
+    .nav-links { list-style: none; display: flex; gap: 1.8rem; }
+    .nav-links a {
+      font-family: var(--fm); font-size: 0.74rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #777;
+      border-bottom: 1px solid transparent; padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-links a:hover { color: #ccc; }
+    .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .hamburger { display: none; cursor: pointer; font-size: 1.4rem; color: #777; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem 2.5rem 3rem;
+    }
+    .page-eyebrow {
+      font-family: var(--fm); font-size: 0.68rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--mist); margin-bottom: 0.75rem;
+    }
+    .page-title {
+      font-family: var(--fd);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #eee; font-weight: 400;
+      margin-bottom: 1rem; line-height: 1.1;
+    }
+    .page-title em { font-style: italic; color: var(--gold); }
+
+    /* the one-line philosophy */
+    .page-philosophy {
+      font-family: var(--fd);
+      font-size: 1.1rem; font-style: italic;
+      color: #888; max-width: 560px;
+      line-height: 1.6; margin-bottom: 2.5rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 1rem;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 2.5rem 3rem;
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: var(--fm); font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #777; background: transparent;
+      cursor: pointer; transition: all .2s;
+    }
+    .filter-btn:hover { border-color: #999; color: #ccc; }
+    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: #1e1e1e; }
+
+    /* ── CHAPTER SECTIONS ── */
+    .chapter {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 2.5rem 5rem;
+    }
+    .chapter-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .chapter-num {
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mist); margin-bottom: 0.4rem;
+    }
+    .chapter-title {
+      font-family: var(--fd); font-size: 1.6rem;
+      color: #eee; font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .chapter-desc {
+      font-family: var(--fb); font-size: 0.9rem;
+      color: #666; line-height: 1.7;
+      max-width: 520px; font-style: italic;
+    }
+
+    /* ── MASONRY PHOTO GRID ──
+       CSS columns give natural masonry layout — photos stack like bricks.
+       To add a photo: put an <img> inside a .photo-item div anywhere in .grid.
+       Tall photos and wide photos both work — the layout adapts automatically.
+    */
+    .grid {
+      columns: 3 280px;   /* 3 columns on desktop, collapses on mobile */
+      column-gap: 6px;
+    }
+    .photo-item {
+      break-inside: avoid;  /* prevents a photo from splitting across columns */
+      margin-bottom: 6px;
+      position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+    .photo-item img {
+      transition: transform .4s ease, filter .4s ease;
+      filter: brightness(0.9);
+    }
+    .photo-item:hover img {
+      transform: scale(1.03);
+      filter: brightness(1);
+    }
+
+    /* caption on hover */
+    .photo-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      opacity: 0; transition: opacity .3s ease;
+    }
+    .photo-item:hover .photo-caption { opacity: 1; }
+
+    /* ── PLACEHOLDER TILES ──
+       These are coloured boxes that stand in for your real photos.
+       REPLACING WITH REAL PHOTOS:
+       <div class="photo-item" data-category="wildlife">
+         <img src="your-photo.jpg" alt="brief description"/>
+         <div class="photo-caption">Rufous Sibia · Uttarakhand, 2025</div>
+       </div>
+
+       The data-category attribute controls which filter tab shows it:
+       data-category="wildlife"  → shows under Wildlife & Landscape
+       data-category="street"    → shows under Street
+       data-category="art"       → shows under Digital Art
+    */
+
+    /* placeholder colours — remove when adding real photos */
+    .ph { background: #2a2a2a; display: flex; align-items: center; justify-content: center; font-family: var(--fm); font-size: 0.65rem; color: #444; letter-spacing: 0.1em; }
+    .ph-tall  { height: 320px; }
+    .ph-med   { height: 220px; }
+    .ph-short { height: 160px; }
+    .ph-wide  { height: 200px; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-height: 90vh; max-width: 90vw;
+      width: auto; height: auto;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-size: 2rem; color: #888; cursor: pointer;
+      line-height: 1; transition: color .2s;
+    }
+    .lightbox-close:hover { color: white; }
+    .lightbox-caption {
+      position: absolute; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--fm); font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #666;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111; color: rgba(255,255,255,0.35);
+      padding: 2rem 2.5rem; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-left { font-family: var(--fm); font-size: 0.68rem; letter-spacing: 0.05em; }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { font-family: var(--fm); font-size: 0.7rem; color: rgba(255,255,255,0.35); transition: color .2s; }
+    .footer-links a:hover { color: white; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: #1e1e1e; flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: block; }
+      .page-header { padding: 3rem 1.5rem 2rem; }
+      .filter-bar { padding: 0 1.5rem 2rem; }
+      .chapter { padding: 0 1.5rem 3.5rem; }
+      .grid { columns: 2 160px; }
+      footer { padding: 1.5rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .grid { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <span class="nav-name">Sandeep Kumar</span>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="fieldwork.html">Field Work</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="anecdotes.html">Anecdotes</a></li>
+      <li><a href="lens.html" class="active">Through the Lens</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+    <span class="hamburger" id="ham">☰</span>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <p class="page-eyebrow">Archive · Photography &amp; Art</p>
+    <h1 class="page-title">Through <em>the Lens</em></h1>
+    <p class="page-philosophy">
+      I stop when something makes me think.<br>
+      The camera is how I explain why.
+    </p>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filter('all', this)">All</button>
+    <button class="filter-btn" onclick="filter('wildlife', this)">Wildlife &amp; Landscape</button>
+    <button class="filter-btn" onclick="filter('street', this)">Street</button>
+    <button class="filter-btn" onclick="filter('art', this)">Digital Art</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CHAPTER I — WILDLIFE & LANDSCAPE
+  ════════════════════════════════════════════ -->
+  <div class="chapter" id="chapter-wildlife">
+    <div class="chapter-header">
+      <p class="chapter-num">Chapter I</p>
+      <h2 class="chapter-title">The Forest Eye</h2>
+      <p class="chapter-desc">
+        Wildlife and landscape — what the field looks like before it becomes data.
+        These are the moments fieldwork gives you if you're paying attention.
+      </p>
+    </div>
+
+    <!--
+      HOW TO ADD YOUR WILDLIFE PHOTOS:
+      Replace each .ph placeholder div with a real .photo-item like this:
+
+      <div class="photo-item" data-category="wildlife">
+        <img src="your-bird-photo.jpg" alt="Rufous Sibia" loading="lazy"/>
+        <div class="photo-caption">Rufous Sibia · Uttarakhand, 2025</div>
+      </div>
+
+      Tall portrait photos go well in the first column.
+      You can mix tall and short freely — the masonry layout handles it.
+    -->
+    <div class="grid" id="grid-wildlife">
+
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-tall">[ your photo ]</div>
+        <div class="photo-caption">Mixed flock · Uttarakhand, 2025</div>
+      </div>
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-med">[ your photo ]</div>
+        <div class="photo-caption">Oak forest at dawn</div>
+      </div>
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-short">[ your photo ]</div>
+        <div class="photo-caption">Himalayan landscape</div>
+      </div>
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-tall">[ your photo ]</div>
+        <div class="photo-caption">Bird in canopy</div>
+      </div>
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-wide">[ your photo ]</div>
+        <div class="photo-caption">Rhododendron belt</div>
+      </div>
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-med">[ your photo ]</div>
+        <div class="photo-caption">Forest floor details</div>
+      </div>
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-short">[ your photo ]</div>
+        <div class="photo-caption">Mist at treeline</div>
+      </div>
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-tall">[ your photo ]</div>
+        <div class="photo-caption">Field notes in frame</div>
+      </div>
+      <div class="photo-item" data-category="wildlife">
+        <div class="ph ph-med">[ your photo ]</div>
+        <div class="photo-caption">Foraging behaviour</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CHAPTER II — STREET
+  ════════════════════════════════════════════ -->
+  <div class="chapter" id="chapter-street">
+    <div class="chapter-header">
+      <p class="chapter-num">Chapter II</p>
+      <h2 class="chapter-title">Cities I've Passed Through</h2>
+      <p class="chapter-desc">
+        The same instinct that tracks a mixed flock through a forest
+        works on a street corner too — something moves, something holds still,
+        and for a moment it means something.
+      </p>
+    </div>
+
+    <div class="grid" id="grid-street">
+
+      <div class="photo-item" data-category="street">
+        <div class="ph ph-tall" style="background:#222">[ your photo ]</div>
+        <div class="photo-caption">Jharkhand street, 2024</div>
+      </div>
+      <div class="photo-item" data-category="street">
+        <div class="ph ph-short" style="background:#222">[ your photo ]</div>
+        <div class="photo-caption">Light and shadow</div>
+      </div>
+      <div class="photo-item" data-category="street">
+        <div class="ph ph-med" style="background:#222">[ your photo ]</div>
+        <div class="photo-caption">Someone passing by</div>
+      </div>
+      <div class="photo-item" data-category="street">
+        <div class="ph ph-wide" style="background:#222">[ your photo ]</div>
+        <div class="photo-caption">Evening market</div>
+      </div>
+      <div class="photo-item" data-category="street">
+        <div class="ph ph-tall" style="background:#222">[ your photo ]</div>
+        <div class="photo-caption">Urban geometry</div>
+      </div>
+      <div class="photo-item" data-category="street">
+        <div class="ph ph-med" style="background:#222">[ your photo ]</div>
+        <div class="photo-caption">Faces I didn't know</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CHAPTER III — DIGITAL ART
+  ════════════════════════════════════════════ -->
+  <div class="chapter" id="chapter-art">
+    <div class="chapter-header">
+      <p class="chapter-num">Chapter III</p>
+      <h2 class="chapter-title">Made, Not Found</h2>
+      <p class="chapter-desc">
+        Photography captures what exists. Digital art builds what doesn't — yet.
+        These are things I couldn't photograph, so I made them instead.
+      </p>
+    </div>
+
+    <div class="grid" id="grid-art">
+
+      <div class="photo-item" data-category="art">
+        <div class="ph ph-tall" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="photo-caption">Digital piece, 2024</div>
+      </div>
+      <div class="photo-item" data-category="art">
+        <div class="ph ph-med" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="photo-caption">Untitled</div>
+      </div>
+      <div class="photo-item" data-category="art">
+        <div class="ph ph-short" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="photo-caption">Concept study</div>
+      </div>
+      <div class="photo-item" data-category="art">
+        <div class="ph ph-wide" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="photo-caption">Species illustration</div>
+      </div>
+      <div class="photo-item" data-category="art">
+        <div class="ph ph-tall" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="photo-caption">Field sketch, digital</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <img id="lightbox-img" src="" alt=""/>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">Sandeep Kumar · Ecologist · Naturalist · Photographer</div>
+      <div class="footer-links">
+        <a href="mailto:sk21ms053@iiserkol.ac.in">✉ Email</a>
+        <a href="https://ebird.org/profile/MTk1NzE3OQ/world" target="_blank">🐦 eBird</a>
+        <a href="https://www.instagram.com/ig_sandeep.3/" target="_blank">📷 Instagram</a>
+        <a href="https://x.com/IgnoramusNWords" target="_blank">𝕏 Twitter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Mobile nav ──
+    const ham = document.getElementById('ham');
+    const nl  = document.getElementById('navLinks');
+    ham.addEventListener('click', () => {
+      nl.classList.toggle('open');
+      ham.textContent = nl.classList.contains('open') ? '✕' : '☰';
+    });
+
+    // ── Filter tabs ──
+    // When you click a filter, it hides photos that don't match
+    // by checking the data-category attribute on each .photo-item
+    function filter(cat, btn) {
+      // update active button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // show/hide items
+      document.querySelectorAll('.photo-item').forEach(item => {
+        const match = cat === 'all' || item.dataset.category === cat;
+        item.style.display = match ? 'block' : 'none';
+      });
+
+      // show/hide chapter headers
+      ['wildlife','street','art'].forEach(c => {
+        const chapter = document.getElementById('chapter-' + c);
+        if (cat === 'all' || cat === c) {
+          chapter.style.display = 'block';
+        } else {
+          chapter.style.display = 'none';
+        }
+      });
+    }
+
+    // ── Lightbox ──
+    // Clicking any photo opens a full-screen lightbox
+    // Works automatically for real <img> tags inside .photo-item
+    document.querySelectorAll('.photo-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        if (!img) return; // skip placeholders
+        const caption = item.querySelector('.photo-caption');
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox-caption').textContent =
+          caption ? caption.textContent : '';
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox(e) {
+      if (e && e.target !== document.getElementById('lightbox') &&
+          !e.target.classList.contains('lightbox-close')) return;
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') });
+    });
+
+    // Nav shadow
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.boxShadow =
+        scrollY > 40 ? '0 2px 18px rgba(0,0,0,0.3)' : 'none';
+    });
+  </script>
+</body>
+</html>
