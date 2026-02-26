@@ -18,7 +18,7 @@
       --fd: 'Playfair Display', Georgia, serif;
       --fb: 'Source Serif 4', Georgia, serif;
       --fm: 'DM Mono', monospace;
-      --max: 1100px;
+      --max: 860px;
       --nav: 64px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,7 +26,7 @@
     body { background: var(--cream); color: var(--ink); font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
 
-    /* NAV — identical across all pages */
+    /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
       height: var(--nav);
@@ -51,8 +51,7 @@
     .page-header {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 4.5rem 2.5rem 2.5rem;
-      border-bottom: 1px solid rgba(92,74,50,0.12);
+      padding: 4.5rem 2.5rem 3rem;
     }
     .page-eyebrow {
       font-family: var(--fm); font-size: 0.7rem;
@@ -66,92 +65,69 @@
       margin-bottom: 1rem;
     }
     .page-title em { font-style: italic; color: var(--earth); }
-    .page-desc {
-      font-size: 0.95rem; color: #666;
-      max-width: 560px; line-height: 1.8;
-    }
-    .page-desc a {
-      color: var(--earth); border-bottom: 1px solid currentColor;
-      padding-bottom: 1px; transition: color .2s;
-    }
-    .page-desc a:hover { color: var(--forest); }
 
-    /* MAIN CONTENT */
-    .pub-page {
+    /* SCHOLAR BADGE — sits right below the title */
+    .scholar-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--fm); font-size: 0.72rem; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--forest);
+      border: 1px solid rgba(44,59,45,0.35);
+      padding: 0.4rem 1rem;
+      transition: all .25s ease;
+    }
+    .scholar-badge:hover { background: var(--forest); color: var(--cream); }
+    .scholar-icon { font-size: 1rem; }
+
+    /* DIVIDER */
+    .divider {
+      max-width: var(--max); margin: 0 auto 0;
+      border: none; border-top: 1px solid rgba(92,74,50,0.15);
+    }
+
+    /* PUB LIST */
+    .pub-list {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 3.5rem 2.5rem 6rem;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 0 5rem;
-      align-items: start;
+      padding: 0 2.5rem 6rem;
     }
 
-    /* STICKY SIDEBAR — section jump links */
-    .pub-sidebar {
-      position: sticky;
-      top: calc(var(--nav) + 2rem);
-    }
-    .sidebar-label {
-      font-family: var(--fm); font-size: 0.65rem;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 1rem;
-    }
-    .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .sidebar-links a {
-      font-family: var(--fm); font-size: 0.74rem;
-      letter-spacing: 0.05em; color: #888;
-      transition: color .2s;
-    }
-    .sidebar-links a:hover { color: var(--forest); }
-
-    /* PUBLICATION SECTIONS */
-    .pub-section { margin-bottom: 4rem; }
-    .pub-section:last-child { margin-bottom: 0; }
-
-    .sec-label {
-      font-family: var(--fm); font-size: 0.68rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 0.5rem;
-    }
-    .sec-heading {
-      font-family: var(--fd);
-      font-size: 1.4rem; font-weight: 400;
-      color: var(--forest); margin-bottom: 2rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid rgba(92,74,50,0.15);
+    /* YEAR GROUP HEADER */
+    .year-group { margin-top: 3.5rem; }
+    .year-label {
+      font-family: var(--fm);
+      font-size: 0.72rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--mist);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(92,74,50,0.12);
     }
 
-    /* SINGLE PUBLICATION ENTRY */
-    /*
-      HOW TO ADD A NEW PUBLICATION:
-      Copy the entire .pub-entry block below and fill in:
-      - .pub-title: full paper title
-      - .pub-authors: all authors — wrap YOUR name in <strong>
-      - .pub-journal: journal name in <em>, then year, volume, pages
-      - .pub-abstract: 1-2 sentence summary (optional, toggle with JS)
-      - .pub-links: add/remove link buttons as needed
-
-      For "manuscripts in preparation", remove the .pub-links div
-      and change the badge to "In prep" or "Under review"
+    /* SINGLE ENTRY
+       HOW TO ADD A PAPER:
+       Copy one .pub-entry block. Fill in:
+       - .pub-title    → full paper title
+       - .pub-authors  → all authors, wrap your name in <strong>
+       - .pub-journal  → journal in <em>, then details
+       - .pub-links    → add/remove links as needed
+       - .pub-abstract → optional, hidden until clicked
+       Wrap it inside the correct .year-group.
     */
     .pub-entry {
-      padding: 1.6rem 0;
+      padding: 1.75rem 0;
       border-bottom: 1px solid rgba(92,74,50,0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
     }
     .pub-entry:last-child { border-bottom: none; }
 
+    .pub-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.4rem; }
+
     .pub-badge {
-      display: inline-block;
-      font-family: var(--fm); font-size: 0.62rem;
+      flex-shrink: 0;
+      font-family: var(--fm); font-size: 0.6rem;
       letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.15rem 0.55rem;
+      padding: 0.15rem 0.5rem;
       border: 1px solid;
-      margin-bottom: 0.2rem;
-      width: fit-content;
+      margin-top: 0.2rem;
     }
     .badge-published { color: var(--forest); border-color: var(--forest); }
     .badge-review    { color: var(--gold);   border-color: var(--gold); }
@@ -160,33 +136,38 @@
     .pub-title {
       font-family: var(--fd);
       font-size: 1.05rem; font-weight: 400;
-      color: var(--ink); line-height: 1.4;
+      color: var(--ink); line-height: 1.45;
+      flex: 1;
     }
+
     .pub-authors {
-      font-family: var(--fm); font-size: 0.76rem;
-      letter-spacing: 0.03em; color: #666;
+      font-family: var(--fm); font-size: 0.74rem;
+      letter-spacing: 0.02em; color: #777;
+      margin-bottom: 0.25rem;
     }
     .pub-authors strong { color: var(--ink); font-weight: 500; }
 
     .pub-journal {
-      font-family: var(--fm); font-size: 0.76rem;
-      color: var(--earth); letter-spacing: 0.02em;
+      font-family: var(--fm); font-size: 0.74rem;
+      color: var(--earth);
     }
     .pub-journal em { font-style: italic; }
 
     .pub-abstract {
       font-size: 0.88rem; color: #555;
-      line-height: 1.75; margin-top: 0.3rem;
-      display: none; /* hidden by default, toggle button shows it */
+      line-height: 1.75; margin-top: 0.75rem;
+      padding-left: 1rem;
+      border-left: 2px solid rgba(92,74,50,0.2);
+      display: none;
     }
     .pub-abstract.open { display: block; }
 
     .pub-links {
       display: flex; gap: 0.75rem;
-      flex-wrap: wrap; margin-top: 0.4rem;
+      flex-wrap: wrap; margin-top: 0.65rem; align-items: center;
     }
     .pub-link {
-      font-family: var(--fm); font-size: 0.68rem;
+      font-family: var(--fm); font-size: 0.67rem;
       letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--mist);
       border-bottom: 1px solid currentColor;
@@ -194,38 +175,31 @@
       transition: color .2s; cursor: pointer;
     }
     .pub-link:hover { color: var(--earth); }
-    .pub-link.abstract-toggle { color: var(--mist); }
-    .pub-link.abstract-toggle.open { color: var(--forest); }
+    .pub-link.scholar {
+      color: var(--forest);
+      display: inline-flex; align-items: center; gap: 0.25rem;
+    }
+    .pub-link.scholar:hover { color: var(--earth); }
+    .pub-link.abstract-btn { color: var(--mist); }
+    .pub-link.abstract-btn.open { color: var(--forest); }
 
     /* FOOTER */
-    footer {
-      background: var(--ink);
-      color: rgba(255,255,255,0.6);
-      padding: 3rem 2.5rem 1.5rem;
-    }
-    .footer-inner {
-      max-width: var(--max); margin: 0 auto;
-      display: flex; justify-content: space-between;
-      align-items: flex-start; gap: 2rem; flex-wrap: wrap;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
+    footer { background: var(--ink); color: rgba(255,255,255,0.6); padding: 3rem 2.5rem 1.5rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
     .footer-name { font-family: var(--fd); font-size: 1rem; color: white; display: block; margin-bottom: 0.25rem; }
     .footer-sub  { font-family: var(--fm); font-size: 0.7rem; letter-spacing: 0.04em; }
     .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
     .footer-links a { font-family: var(--fm); font-size: 0.72rem; color: rgba(255,255,255,0.45); transition: color .2s; }
     .footer-links a:hover { color: white; }
-    .footer-bottom { max-width: var(--max); margin: 1.25rem auto 0; font-family: var(--fm); font-size: 0.65rem; color: rgba(255,255,255,0.22); text-align: center; }
+    .footer-bottom { max-width: 1100px; margin: 1.25rem auto 0; font-family: var(--fm); font-size: 0.65rem; color: rgba(255,255,255,0.22); text-align: center; }
 
-    /* MOBILE */
     @media (max-width: 768px) {
       .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: var(--cream); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(92,74,50,0.15); }
       .nav-links.open { display: flex; }
       .hamburger { display: block; }
-      .pub-page { grid-template-columns: 1fr; gap: 0; }
-      .pub-sidebar { position: static; margin-bottom: 2.5rem; }
       .page-header { padding: 3rem 1.5rem 2rem; }
-      .pub-page { padding: 2rem 1.5rem 4rem; }
+      .pub-list { padding: 0 1.5rem 4rem; }
+      .pub-top { flex-direction: column; gap: 0.4rem; }
       footer { padding: 2.5rem 1.5rem 1.5rem; }
       .footer-inner { flex-direction: column; }
     }
@@ -247,138 +221,136 @@
     <span class="hamburger" id="ham">☰</span>
   </nav>
 
+  <!-- PAGE HEADER -->
   <div class="page-header">
     <p class="page-eyebrow">Research Output</p>
     <h1 class="page-title">Publications <em>&amp; Manuscripts</em></h1>
-    <p class="page-desc">
-      Peer-reviewed papers, preprints, and work in progress.
-      My name is <strong>bolded</strong> in each author list.
-      You can also find my work on
-      <a href="https://scholar.google.com" target="_blank">Google Scholar</a>.
-    </p>
+    <!-- SCHOLAR BADGE: replace the href with your real Google Scholar profile URL -->
+    <a href="https://scholar.google.com/citations?user=9P7wjDAAAAAJ&hl=en&authuser=1" target="_blank" class="scholar-badge">
+      <span class="scholar-icon">🎓</span> Google Scholar Profile
+    </a>
   </div>
 
-  <div class="pub-page">
+  <hr class="divider"/>
 
-    <!-- SIDEBAR — jump links -->
-    <aside class="pub-sidebar">
-      <p class="sidebar-label">Jump to</p>
-      <ul class="sidebar-links">
-        <li><a href="#published">Published</a></li>
-        <li><a href="#review">Under Review</a></li>
-        <li><a href="#prep">In Preparation</a></li>
-      </ul>
-    </aside>
+  <!-- PUBLICATION LIST -->
+  <div class="pub-list">
 
-    <!-- MAIN PUB LIST -->
-    <main>
+    <!-- ══ 2025 ══════════════════════════════════════
+         HOW TO ADD A NEW YEAR GROUP:
+         Copy a .year-group block, change the .year-label text,
+         and put your papers inside it.
+    ════════════════════════════════════════════════ -->
+    <div class="year-group">
+      <p class="year-label">2025</p>
 
-      <!-- ── PUBLISHED ────────────────────────────── -->
-      <div class="pub-section" id="published">
-        <p class="sec-label">01</p>
-        <h2 class="sec-heading">Published</h2>
-
-        <!--
-          YOUR PUBLISHED PAPER — fill in real details.
-          If you have no published papers yet, delete this entire .pub-entry block
-          and leave only the "Under Review" and "In Preparation" sections.
-        -->
-        <div class="pub-entry">
-          <span class="pub-badge badge-published">Published</span>
+      <!-- PAPER 1
+           Replace all placeholder text with your real paper details.
+           Your name goes inside <strong> in .pub-authors.
+           For the Scholar link: find your paper on scholar.google.com,
+           copy the URL, and paste it into the href below.
+      -->
+      <div class="pub-entry">
+        <div class="pub-top">
           <p class="pub-title">
             Mixed-species flock dynamics in Himalayan oak forests:
             composition, stability, and ecological drivers
           </p>
-          <p class="pub-authors">
-            <strong>Sandeep Kumar</strong>, Co-Author Name, Supervisor Name
-          </p>
-          <p class="pub-journal">
-            <em>Journal of Avian Biology</em> · 2025 · Vol(Issue): pp–pp
-          </p>
-          <p class="pub-abstract">
-            Mixed-species flocks are a prominent feature of tropical and subtropical forests.
-            This study examines flock composition and stability across an elevational gradient
-            in the Himalayan oak belt, finding that nuclear species identity and forest
-            structure are the strongest predictors of flock size and species richness.
-          </p>
-          <div class="pub-links">
-            <a href="#" class="pub-link">PDF</a>
-            <a href="#" class="pub-link">DOI</a>
-            <a href="#" class="pub-link">Data</a>
-            <span class="pub-link abstract-toggle" onclick="toggleAbstract(this)">Abstract ↓</span>
-          </div>
+          <span class="pub-badge badge-published">Published</span>
         </div>
-
+        <p class="pub-authors">
+          <strong>Sandeep Kumar</strong>, Co-Author Name, Supervisor Name
+        </p>
+        <p class="pub-journal">
+          <em>Journal of Avian Biology</em> · 2025 · Vol(Issue): pp–pp
+        </p>
+        <div class="pub-links">
+          <a href="#" class="pub-link">PDF</a>
+          <a href="#" class="pub-link">DOI</a>
+          <a href="https://scholar.google.com/scholar?q=your+paper+title" target="_blank" class="pub-link scholar">🎓 Scholar</a>
+          <span class="pub-link abstract-btn" onclick="toggleAbstract(this)">Abstract ↓</span>
+        </div>
+        <p class="pub-abstract">
+          Mixed-species flocks are a prominent feature of Himalayan forests.
+          This study examines flock composition and stability across an elevational gradient
+          in the oak belt, finding that nuclear species identity and forest structure are
+          the strongest predictors of flock size and species richness.
+        </p>
       </div>
 
-      <!-- ── UNDER REVIEW ─────────────────────────── -->
-      <div class="pub-section" id="review">
-        <p class="sec-label">02</p>
-        <h2 class="sec-heading">Under Review</h2>
+    </div>
 
-        <div class="pub-entry">
-          <span class="pub-badge badge-review">Under Review</span>
+    <!-- ══ UNDER REVIEW ══════════════════════════════ -->
+    <div class="year-group">
+      <p class="year-label">Under Review</p>
+
+      <div class="pub-entry">
+        <div class="pub-top">
           <p class="pub-title">
             Habitat corridor mapping using multi-temporal remote sensing
             in a montane landscape of the western Himalayas
           </p>
-          <p class="pub-authors">
-            <strong>Sandeep Kumar</strong>, Supervisor Name
-          </p>
-          <p class="pub-journal">
-            Submitted to <em>Landscape Ecology</em> · 2025
-          </p>
-          <p class="pub-abstract">
-            Using multi-temporal Landsat and Sentinel-2 imagery, we delineate
-            functional habitat corridors across a fragmented montane landscape.
-            The analysis identifies previously undocumented connectivity hotspots
-            with implications for wildlife management policy.
-          </p>
-          <div class="pub-links">
-            <a href="#" class="pub-link">Preprint</a>
-            <span class="pub-link abstract-toggle" onclick="toggleAbstract(this)">Abstract ↓</span>
-          </div>
+          <span class="pub-badge badge-review">Under Review</span>
         </div>
-
+        <p class="pub-authors">
+          <strong>Sandeep Kumar</strong>, Supervisor Name
+        </p>
+        <p class="pub-journal">
+          Submitted to <em>Landscape Ecology</em> · 2025
+        </p>
+        <div class="pub-links">
+          <a href="#" class="pub-link">Preprint</a>
+          <span class="pub-link abstract-btn" onclick="toggleAbstract(this)">Abstract ↓</span>
+        </div>
+        <p class="pub-abstract">
+          Using multi-temporal Landsat and Sentinel-2 imagery, we delineate
+          functional habitat corridors across a fragmented montane landscape.
+          The analysis identifies previously undocumented connectivity hotspots
+          with implications for conservation planning.
+        </p>
       </div>
 
-      <!-- ── IN PREPARATION ──────────────────────── -->
-      <div class="pub-section" id="prep">
-        <p class="sec-label">03</p>
-        <h2 class="sec-heading">In Preparation</h2>
+    </div>
 
-        <div class="pub-entry">
-          <span class="pub-badge badge-prep">In Preparation</span>
+    <!-- ══ IN PREPARATION ════════════════════════════ -->
+    <div class="year-group">
+      <p class="year-label">In Preparation</p>
+
+      <div class="pub-entry">
+        <div class="pub-top">
           <p class="pub-title">
             Sentinel species and information cascades in Himalayan
             mixed-species bird flocks
           </p>
-          <p class="pub-authors">
-            <strong>Sandeep Kumar</strong>, Supervisor Name
-          </p>
-          <p class="pub-journal" style="color:var(--mist)">
-            Target journal: <em>Behavioral Ecology</em>
-          </p>
+          <span class="pub-badge badge-prep">In Prep</span>
         </div>
+        <p class="pub-authors">
+          <strong>Sandeep Kumar</strong>, Supervisor Name
+        </p>
+        <p class="pub-journal" style="color:var(--mist)">
+          Target: <em>Behavioral Ecology</em>
+        </p>
+      </div>
 
-        <div class="pub-entry">
-          <span class="pub-badge badge-prep">In Preparation</span>
+      <div class="pub-entry">
+        <div class="pub-top">
           <p class="pub-title">
             Resource partitioning and foraging niche breadth in co-flocking
             insectivores of the Himalayan mid-hills
           </p>
-          <p class="pub-authors">
-            <strong>Sandeep Kumar</strong>, Co-Author Name, Supervisor Name
-          </p>
-          <p class="pub-journal" style="color:var(--mist)">
-            Target journal: <em>Ornithology</em>
-          </p>
+          <span class="pub-badge badge-prep">In Prep</span>
         </div>
-
+        <p class="pub-authors">
+          <strong>Sandeep Kumar</strong>, Co-Author Name, Supervisor Name
+        </p>
+        <p class="pub-journal" style="color:var(--mist)">
+          Target: <em>Ornithology</em>
+        </p>
       </div>
 
-    </main>
-  </div>
+    </div>
+
+  </div><!-- end pub-list -->
 
   <footer>
     <div class="footer-inner">
@@ -397,27 +369,21 @@
   </footer>
 
   <script>
-    // Mobile nav
     const ham = document.getElementById('ham');
     const nl  = document.getElementById('navLinks');
     ham.addEventListener('click', () => {
       nl.classList.toggle('open');
       ham.textContent = nl.classList.contains('open') ? '✕' : '☰';
     });
-
-    // Nav shadow on scroll
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').style.boxShadow =
         scrollY > 40 ? '0 2px 18px rgba(0,0,0,0.07)' : 'none';
     });
-
-    // Abstract toggle — shows/hides the abstract paragraph
     function toggleAbstract(btn) {
-      const entry   = btn.closest('.pub-entry');
-      const abstract = entry.querySelector('.pub-abstract');
-      const isOpen  = abstract.classList.toggle('open');
-      btn.classList.toggle('open', isOpen);
-      btn.textContent = isOpen ? 'Abstract ↑' : 'Abstract ↓';
+      const abstract = btn.closest('.pub-entry').querySelector('.pub-abstract');
+      const open = abstract.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.textContent = open ? 'Abstract ↑' : 'Abstract ↓';
     }
   </script>
 </body>
