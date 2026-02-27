@@ -4,97 +4,138 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sandeep Kumar</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
   <style>
+    /* ── DESIGN SYSTEM ──────────────────────────────
+       3 fonts, used consistently everywhere:
+       --fd  Playfair Display → titles, headings, names, blockquotes
+       --fb  Source Serif 4  → body text, descriptions, paragraphs
+       --fm  DM Mono         → labels, nav, tags, dates, buttons, captions
+
+       Colours:
+       --rose   #e6dada  dusty rose — used as gradient start, accent
+       --teal   #274046  deep teal  — used as gradient end, dark base
+       --bg     #141c1e  near-black with teal undertone — all sections below hero
+       --surface #1c2729  slightly lighter for cards / bands
+       --text   #d8d0cc  warm off-white body text
+       --dim    #7a8c8e  muted teal-grey — labels, dates
+       --gold   #c4922a  accent — links, active states
+    ──────────────────────────────────────────────── */
     :root {
-      --forest: #2C3B2D;
-      --earth:  #5C4A32;
-      --cream:  #F4F0E6;
-      --parch:  #EDE8D8;
-      --ink:    #1E1E1E;
-      --mist:   #9CA89C;
-      --gold:   #C4922A;
+      --rose:    #e6dada;
+      --teal:    #274046;
+      --bg:      #141c1e;
+      --surface: #1c2729;
+      --text:    #d8d0cc;
+      --dim:     #7a8c8e;
+      --gold:    #c4922a;
       --fd: 'Playfair Display', Georgia, serif;
       --fb: 'Source Serif 4', Georgia, serif;
       --fm: 'DM Mono', monospace;
       --max: 1100px;
-      --nav: 64px;
+      --nav: 60px;
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--cream); color: var(--ink); font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fb);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
     a { color: inherit; text-decoration: none; }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
       height: var(--nav);
-      background: rgba(244,240,230,0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(92,74,50,0.15);
+      background: rgba(20,28,30,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(230,218,218,0.08);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2.5rem;
     }
-    .nav-name { font-family: var(--fd); font-size: 1.05rem; color: var(--forest); }
+    .nav-name {
+      font-family: var(--fd);
+      font-size: 1rem; color: var(--rose);
+      letter-spacing: 0.02em;
+    }
     .nav-links { list-style: none; display: flex; gap: 1.8rem; }
     .nav-links a {
-      font-family: var(--fm); font-size: 0.74rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--earth);
+      font-family: var(--fm); font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim);
       border-bottom: 1px solid transparent; padding-bottom: 2px;
       transition: color .2s, border-color .2s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--forest); border-bottom-color: var(--forest); }
-    .hamburger { display: none; cursor: pointer; font-size: 1.4rem; color: var(--forest); }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-links a.active { color: var(--rose); border-bottom-color: var(--rose); }
+    .hamburger { display: none; cursor: pointer; font-size: 1.3rem; color: var(--dim); }
 
-    /* ─── SECTION 1: HERO — name + bio only, no photo ─── */
+    /* ── HERO ──
+       Gradient: rose top-left → teal bottom-right.
+       Fades into --bg at the bottom via the ::after overlay.
+       Name + bio on left, slideshow on right.
+    */
     .hero {
-      max-width: var(--max);
-      margin: 0 auto;
+      min-height: 100vh;
+      background:
+        linear-gradient(160deg, #e6dada 0%, #b8a8b0 25%, #4a6068 60%, #274046 100%);
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
       padding: 5rem 2.5rem 4rem;
-      animation: fadeUp .9s ease both;
+      gap: 4rem;
+      max-width: 100%;
     }
+    /* fade hero bottom into --bg so the transition is seamless */
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+
+    .hero-left { position: relative; z-index: 2; animation: fadeUp .9s ease both; }
     .hero-eyebrow {
-      font-family: var(--fm); font-size: 0.7rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 1rem;
+      font-family: var(--fm); font-size: 0.68rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(230,218,218,0.5); margin-bottom: 1rem;
     }
     .hero-name {
-      font-family: var(--fd); font-size: clamp(2.8rem, 5vw, 4.2rem);
-      color: var(--forest); font-weight: 400; line-height: 1.1;
-      margin-bottom: 1.2rem;
+      font-family: var(--fd);
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      color: #f5f0ee;
+      font-weight: 400; line-height: 1.1; margin-bottom: 1.1rem;
     }
     .hero-bio {
-      font-size: 1.05rem; color: #555; line-height: 1.85;
-      max-width: 520px; margin-bottom: 2rem;
+      font-family: var(--fb);
+      font-size: 1rem; color: rgba(245,240,238,0.75);
+      line-height: 1.85; max-width: 420px; margin-bottom: 2rem;
     }
-    .hero-bio em { font-style: italic; color: var(--earth); }
+    .hero-bio em { font-style: italic; color: rgba(245,240,238,0.95); }
     .cv-link {
-      font-family: var(--fm); font-size: 0.78rem; letter-spacing: 0.08em;
-      color: var(--earth); border-bottom: 1px solid var(--earth);
+      font-family: var(--fm); font-size: 0.74rem; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(230,218,218,0.7);
+      border-bottom: 1px solid rgba(230,218,218,0.35);
       padding-bottom: 2px; transition: color .2s, border-color .2s;
     }
-    .cv-link:hover { color: var(--forest); border-bottom-color: var(--forest); }
+    .cv-link:hover { color: #f5f0ee; border-bottom-color: #f5f0ee; }
 
-    /* ─── SECTION 2: PHOTO SLIDESHOW — full width, cinematic ─── */
-    /*
-      HOW TO ADD YOUR PHOTOS:
-      Each .slide div is one photo. To use your real images:
-      <div class="slide active" style="background-image:url('birds.jpg')">
-
-      Captions update automatically — just change the data-caption attribute.
-      Add as many slides as you want.
-    */
-    .gallery {
-      width: 100%;
-      position: relative;
-      background: var(--ink);
-      overflow: hidden;
-    }
-    .gallery-track {
-      width: 100%;
-      aspect-ratio: 21/8;
-      position: relative;
+    /* ── SLIDESHOW (hero right) ── */
+    .hero-right { position: relative; z-index: 2; animation: fadeUp .9s ease .2s both; }
+    .slideshow {
+      width: 100%; aspect-ratio: 4/5;
+      overflow: hidden; position: relative;
+      border: 1px solid rgba(230,218,218,0.15);
     }
     .slide {
       position: absolute; inset: 0;
@@ -102,239 +143,224 @@
       opacity: 0; transition: opacity 1.2s ease;
     }
     .slide.active { opacity: 1; }
-
     /* placeholder gradients — replace with real photos */
-    .s1 { background: linear-gradient(160deg, #1a2e1b 0%, #3d5c3f 60%, #5C4A32 100%); }
-    .s2 { background: linear-gradient(160deg, #1a2838 0%, #2c4a6e 60%, #4a6b8c 100%); }
-    .s3 { background: linear-gradient(160deg, #2e1a1a 0%, #6e2c2c 60%, #8c4a4a 100%); }
-    .s4 { background: linear-gradient(160deg, #1e2e1a 0%, #4a6b3c 60%, #7A8C6E 100%); }
-
+    .sl1 { background: linear-gradient(160deg,#1a2e1b,#3d5c3f); }
+    .sl2 { background: linear-gradient(160deg,#1a2838,#2c5a6e); }
+    .sl3 { background: linear-gradient(160deg,#2e2218,#6b4a2c); }
+    .sl4 { background: linear-gradient(160deg,#1e2a2e,#3a6068); }
     .slide-caption {
       position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 1.5rem 2.5rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
-      font-family: var(--fm); font-size: 0.68rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.6);
+      padding: 1.25rem 1.5rem;
+      background: linear-gradient(to top,rgba(0,0,0,0.65),transparent);
+      font-family: var(--fm); font-size: 0.63rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55);
       opacity: 0; transition: opacity 1.2s ease;
     }
     .slide.active .slide-caption { opacity: 1; }
-
-    .gallery-dots {
-      display: flex; gap: 6px; justify-content: center;
-      padding: 0.9rem 0; background: var(--ink);
-    }
+    .slide-dots { display: flex; gap: 5px; justify-content: center; margin-top: 0.7rem; }
     .gdot {
       width: 5px; height: 5px; border-radius: 50%;
-      background: rgba(255,255,255,0.2); border: none;
+      background: rgba(230,218,218,0.2); border: none;
       cursor: pointer; transition: background .25s; padding: 0;
     }
-    .gdot.on { background: var(--gold); }
+    .gdot.on { background: var(--rose); }
 
-    /* ─── SECTION 3: INTRO — warm personal text ─── */
+    /* ── INTRO BAND ── */
     .intro {
-      background: white;
-      border-bottom: 1px solid rgba(92,74,50,0.12);
+      background: var(--surface);
+      border-top: 1px solid rgba(230,218,218,0.06);
+      border-bottom: 1px solid rgba(230,218,218,0.06);
       padding: 4.5rem 2.5rem;
     }
     .intro-inner { max-width: 760px; margin: 0 auto; }
     .intro-greeting {
       font-family: var(--fd);
       font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-      color: var(--forest); font-weight: 400;
+      color: var(--rose); font-weight: 400;
       margin-bottom: 1.25rem; line-height: 1.3;
     }
-    .intro-greeting em { font-style: italic; color: var(--earth); }
-    .intro-p { font-size: 1rem; color: #444; line-height: 1.85; margin-bottom: 1rem; }
+    .intro-greeting em { font-style: italic; }
+    .intro-p {
+      font-family: var(--fb);
+      font-size: 0.97rem; color: var(--text);
+      line-height: 1.85; margin-bottom: 1rem;
+    }
     .intro-nav { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; }
     .nav-chip {
-      font-family: var(--fm); font-size: 0.72rem;
+      font-family: var(--fm); font-size: 0.7rem;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--earth); border-bottom: 1px solid var(--earth);
-      padding-bottom: 2px; transition: color .2s, border-color .2s;
+      color: var(--dim);
+      border-bottom: 1px solid var(--dim); padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
     }
-    .nav-chip:hover { color: var(--forest); border-bottom-color: var(--forest); }
+    .nav-chip:hover { color: var(--rose); border-bottom-color: var(--rose); }
 
-    /* ─── SECTION 4: UPDATES ─── */
+    /* ── UPDATES ── */
     .updates {
-      background: var(--parch);
-      border-top: 1px solid rgba(92,74,50,0.12);
-      border-bottom: 1px solid rgba(92,74,50,0.12);
+      background: var(--bg);
+      border-bottom: 1px solid rgba(230,218,218,0.06);
       padding: 4rem 2.5rem;
     }
     .updates-inner { max-width: var(--max); margin: 0 auto; }
     .sec-label {
-      font-family: var(--fm); font-size: 0.7rem;
+      font-family: var(--fm); font-size: 0.68rem;
       letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 0.6rem;
+      color: var(--dim); margin-bottom: 0.5rem;
     }
     .sec-title {
-      font-family: var(--fd); font-size: clamp(1.3rem, 2vw, 1.8rem);
-      color: var(--forest); font-weight: 400; font-style: italic;
+      font-family: var(--fd);
+      font-size: clamp(1.3rem, 2vw, 1.75rem);
+      color: var(--rose); font-weight: 400; font-style: italic;
       margin-bottom: 2rem;
     }
     .update-list { list-style: none; }
     .update-item {
-      display: grid; grid-template-columns: 100px 1fr;
+      display: grid; grid-template-columns: 90px 1fr;
       gap: 1.5rem; padding: 1rem 0;
-      border-bottom: 1px solid rgba(92,74,50,0.1);
-      font-size: 0.92rem; color: #444; line-height: 1.65;
+      border-bottom: 1px solid rgba(230,218,218,0.06);
+      font-family: var(--fb); font-size: 0.9rem;
+      color: #a09898; line-height: 1.65;
     }
     .update-item:last-child { border-bottom: none; }
     .u-date {
-      font-family: var(--fm); font-size: 0.7rem;
-      color: var(--mist); letter-spacing: 0.05em; padding-top: 0.15rem;
+      font-family: var(--fm); font-size: 0.68rem;
+      color: var(--dim); letter-spacing: 0.05em; padding-top: 0.15rem;
     }
-    .update-item strong { color: var(--forest); }
-    .update-item em { font-style: italic; }
+    .update-item strong { color: var(--text); }
 
-    /* ─── SECTION 5: LATEST ANECDOTE ─── */
+    /* ── ANECDOTE ── */
     .anecdote {
-      background: var(--forest);
+      background: var(--teal);
       padding: 5rem 2.5rem;
     }
     .anecdote-inner { max-width: 680px; margin: 0 auto; text-align: center; }
-    .anecdote .sec-label { color: rgba(255,255,255,0.4); }
+    .anecdote .sec-label { color: rgba(230,218,218,0.3); }
     .anecdote blockquote {
       font-family: var(--fd);
       font-size: clamp(1.1rem, 2.2vw, 1.65rem);
-      font-style: italic; color: white; line-height: 1.6;
+      font-style: italic; color: var(--rose); line-height: 1.6;
       margin: 1.5rem 0 1rem; position: relative;
     }
     .anecdote blockquote::before {
-      content: '\201C'; font-size: 4.5rem;
-      color: rgba(196,146,42,0.3);
-      position: absolute; top: -1rem; left: -0.8rem;
+      content: '\201C'; font-size: 5rem;
+      color: rgba(230,218,218,0.12);
+      position: absolute; top: -1.2rem; left: -1rem;
       font-family: var(--fd); line-height: 1;
     }
     .anecdote-meta {
-      font-family: var(--fm); font-size: 0.75rem;
-      color: rgba(255,255,255,0.4); margin-bottom: 2rem;
+      font-family: var(--fm); font-size: 0.72rem;
+      color: rgba(230,218,218,0.35); margin-bottom: 2rem;
     }
     .gold-link {
-      font-family: var(--fm); font-size: 0.8rem; letter-spacing: 0.08em;
+      font-family: var(--fm); font-size: 0.76rem; letter-spacing: 0.08em;
       color: var(--gold); border-bottom: 1px solid var(--gold);
       padding-bottom: 2px; transition: opacity .2s;
     }
-    .gold-link:hover { opacity: 0.75; }
+    .gold-link:hover { opacity: 0.7; }
 
-    /* ─── FOOTER — social handles live here ─── */
-    /*
-      HOW TO ADD YOUR SOCIAL LINKS:
-      Find the footer-links div below and replace href="#" with your real URLs:
-      Email:     href="mailto:yourname@gmail.com"
-      eBird:     href="https://ebird.org/profile/YOUR_ID"
-      Instagram: href="https://instagram.com/YOUR_HANDLE"
-      Scholar:   href="https://scholar.google.com/citations?user=YOUR_ID"
-      LinkedIn:  href="https://linkedin.com/in/YOUR_HANDLE"
-    */
+    /* ── FOOTER ── */
     footer {
-      background: var(--ink);
-      color: rgba(255,255,255,0.6);
-      padding: 3rem 2.5rem 1.5rem;
+      background: #0e1517;
+      padding: 2.5rem 2.5rem 1.5rem;
+      border-top: 1px solid rgba(230,218,218,0.06);
     }
     .footer-inner {
       max-width: var(--max); margin: 0 auto;
       display: flex; justify-content: space-between;
       align-items: flex-start; gap: 2rem; flex-wrap: wrap;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(230,218,218,0.06);
     }
-    .footer-name { font-family: var(--fd); font-size: 1rem; color: white; display: block; margin-bottom: 0.25rem; }
-    .footer-sub { font-family: var(--fm); font-size: 0.7rem; letter-spacing: 0.04em; }
+    .footer-name {
+      font-family: var(--fd); font-size: 0.95rem;
+      color: var(--rose); display: block; margin-bottom: 0.2rem;
+    }
+    .footer-sub { font-family: var(--fm); font-size: 0.68rem; color: var(--dim); }
     .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
     .footer-links a {
-      font-family: var(--fm); font-size: 0.72rem;
-      color: rgba(255,255,255,0.45); letter-spacing: 0.06em;
-      transition: color .2s;
+      font-family: var(--fm); font-size: 0.7rem;
+      color: var(--dim); transition: color .2s;
     }
-    .footer-links a:hover { color: white; }
+    .footer-links a:hover { color: var(--rose); }
     .footer-bottom {
       max-width: var(--max); margin: 1.25rem auto 0;
-      font-family: var(--fm); font-size: 0.65rem;
-      color: rgba(255,255,255,0.22); text-align: center;
+      font-family: var(--fm); font-size: 0.62rem;
+      color: rgba(230,218,218,0.18); text-align: center;
     }
 
-    /* ANIMATIONS */
+    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
     .reveal.on { opacity: 1; transform: translateY(0); }
 
-    /* MOBILE */
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none; position: absolute;
-        top: var(--nav); left: 0; right: 0;
-        background: var(--cream); flex-direction: column;
-        padding: 1.5rem 2rem; gap: 1.2rem;
-        border-bottom: 1px solid rgba(92,74,50,0.15);
-      }
+      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: rgba(20,28,30,0.98); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(230,218,218,0.08); }
       .nav-links.open { display: flex; }
       .hamburger { display: block; }
-      .hero { padding: 3.5rem 1.5rem 3rem; }
-      .gallery-track { aspect-ratio: 16/9; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 3.5rem 1.5rem 3rem; gap: 2.5rem; }
+      .hero-right { order: -1; }
+      .slideshow { aspect-ratio: 16/9; }
       .intro, .updates, .anecdote { padding: 3rem 1.5rem; }
-      footer { padding: 2.5rem 1.5rem 1.5rem; }
-      .footer-inner { flex-direction: column; gap: 1.5rem; }
+      footer { padding: 2rem 1.5rem 1.5rem; }
+      .footer-inner { flex-direction: column; }
       .update-item { grid-template-columns: 1fr; gap: 0.2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav id="navbar">
     <span class="nav-name">Sandeep Kumar</span>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html" class="active">Home</a></li>
-     <!-- <li><a href="about.html">About</a></li> -->
       <li><a href="fieldwork.html">Projects</a></li>
-      <li><a href="Cv.html">CV</a></li>
       <li><a href="publications.html">Publications</a></li>
-       <li><a href="lens.html">Creative</a></li>
       <li><a href="anecdotes.html">Anecdotes</a></li>
+      <li><a href="lens.html">Creative</a></li>
+      <li><a href="cv.html">CV</a></li>
     </ul>
     <span class="hamburger" id="ham">☰</span>
   </nav>
 
-  <!-- ① NAME + BIO -->
+  <!-- ① HERO — gradient background, name left, slideshow right -->
   <div class="hero">
-    <p class="hero-eyebrow">Jharkhand </p>
-    <h1 class="hero-name">Sandeep Kumar</h1>
-    <p class="hero-bio">
-      Ecologist by training. Naturalist by instinct.
-      Observer by necessity — because sometimes
-      a field note isn't <em>enough.</em>
-    </p>
-    <a href="cv.html" class="cv-link">View CV →</a>
-  </div>
-
-  <!-- ② PHOTO SLIDESHOW
-       To use your real photos, add style="background-image:url('filename.jpg')"
-       to each .slide div. Captions are inside each slide.
-       Add more slides by copying a <div class="slide ..."> block.
-  -->
-  <div class="gallery">
-    <div class="gallery-track">
-      <div class="slide s1 active">
-        <div class="slide-caption">Uttarakhand · Mixed flock survey, 2025</div>
-      </div>
-      <div class="slide s2">
-        <div class="slide-caption">Himalayan oak forest · Dawn transect</div>
-      </div>
-      <div class="slide s3">
-        <div class="slide-caption">Field notes · Flock composition data</div>
-      </div>
-      <div class="slide s4">
-        <div class="slide-caption">Through the lens · Rufous Sibia</div>
-      </div>
+    <div class="hero-left">
+      <p class="hero-eyebrow">Jharkhand → Himalayas</p>
+      <h1 class="hero-name">Sandeep Kumar</h1>
+      <p class="hero-bio">
+        Ecologist by training. Naturalist by instinct.
+        Observer by necessity — because sometimes
+        a field note isn't <em>enough.</em>
+      </p>
+      <a href="Cv.html" class="cv-link">View CV →</a>
     </div>
-    <div class="gallery-dots" id="dots"></div>
+
+    <div class="hero-right">
+      <!-- Replace .sl1–.sl4 gradient with real photos:
+           <div class="slide sl1 active" style="background-image:url('photo.jpg')"> -->
+      <div class="slideshow" id="slideshow">
+        <div class="slide sl1 active">
+          <div class="slide-caption">Uttarakhand · Mixed flock survey, 2025</div>
+        </div>
+        <div class="slide sl2">
+          <div class="slide-caption">Himalayan oak forest · Dawn transect</div>
+        </div>
+        <div class="slide sl3">
+          <div class="slide-caption">Field notes · Flock composition data</div>
+        </div>
+        <div class="slide sl4">
+          <div class="slide-caption">Through the lens · Rufous Sibia</div>
+        </div>
+      </div>
+      <div class="slide-dots" id="dots"></div>
+    </div>
   </div>
 
-  <!-- ③ INTRO -->
+  <!-- ② INTRO -->
   <div class="intro">
     <div class="intro-inner reveal">
       <h2 class="intro-greeting">Hey, thanks for dropping by! <em>Here's a bit about me.</em></h2>
@@ -353,17 +379,13 @@
       <div class="intro-nav">
         <a href="fieldwork.html" class="nav-chip">Research →</a>
         <a href="anecdotes.html" class="nav-chip">Anecdotes →</a>
-        <a href="lens.html" class="nav-chip">Photography →</a>
-        <a href="cv.html" class="nav-chip">CV →</a>
-        <a href="about.html" class="nav-chip">About me →</a>
+        <a href="lens.html" class="nav-chip">Creative →</a>
+        <a href="Cv.html" class="nav-chip">CV →</a>
       </div>
     </div>
   </div>
 
-  <!-- ④ UPDATES
-       To add a new update: copy one <li class="update-item"> and paste it
-       at the TOP of the list. Most recent goes first.
-  -->
+  <!-- ③ UPDATES -->
   <div class="updates">
     <div class="updates-inner reveal">
       <p class="sec-label">News</p>
@@ -389,7 +411,7 @@
     </div>
   </div>
 
-  <!-- ⑤ LATEST ANECDOTE -->
+  <!-- ④ ANECDOTE -->
   <div class="anecdote">
     <div class="anecdote-inner reveal">
       <p class="sec-label">Latest from the Field</p>
@@ -402,7 +424,7 @@
     </div>
   </div>
 
-  <!-- FOOTER — social handles -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div>
@@ -410,18 +432,17 @@
         <span class="footer-sub">Ecologist · Naturalist · Photographer</span>
       </div>
       <div class="footer-links">
-        <a href="mailto:sk21ms053@iiserkol.ac.in">✉ Email</a>
+        <a href="/cdn-cgi/l/email-protection#4c3f277e7d213f7c797f0c25253f293e272320622d2f622522">✉ Email</a>
         <a href="https://ebird.org/profile/MTk1NzE3OQ/world" target="_blank">🐦 eBird</a>
         <a href="https://www.instagram.com/ig_sandeep.3/" target="_blank">📷 Instagram</a>
         <a href="https://x.com/IgnoramusNWords" target="_blank">𝕏 Twitter</a>
-        <a href="https://www.linkedin.com/in/sandeep-kumar-414078190/">in LinkedIn</a>
+        <a href="https://www.linkedin.com/in/sandeep-kumar-414078190/" target="_blank">in LinkedIn</a>
       </div>
     </div>
-    <p class="footer-bottom"> © Sandeep Kumar · Built with curiosity · Hosted free on GitHub Pages</p>
+    <p class="footer-bottom">Built with curiosity · Hosted free on GitHub Pages</p>
   </footer>
 
-  <script>
-    // Mobile nav
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const ham = document.getElementById('ham');
     const nl  = document.getElementById('navLinks');
     ham.addEventListener('click', () => {
@@ -433,14 +454,12 @@
     const slides = document.querySelectorAll('.slide');
     const dotsEl = document.getElementById('dots');
     let cur = 0;
-
     slides.forEach((_, i) => {
       const d = document.createElement('button');
       d.className = 'gdot' + (i === 0 ? ' on' : '');
       d.onclick = () => go(i);
       dotsEl.appendChild(d);
     });
-
     function go(n) {
       slides[cur].classList.remove('active');
       dotsEl.children[cur].classList.remove('on');
@@ -448,25 +467,12 @@
       slides[cur].classList.add('active');
       dotsEl.children[cur].classList.add('on');
     }
-
     setInterval(() => go(cur + 1), 3500);
 
     // Scroll reveal
     const ro = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          e.target.style.transitionDelay = i * 0.06 + 's';
-          e.target.classList.add('on');
-        }
-      });
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-    // Nav shadow
     window.addEventListener('scroll', () => {
-      document.getElementById('navbar').style.boxShadow =
-        scrollY > 40 ? '0 2px 18px rgba(0,0,0,0.07)' : 'none';
-    });
-  </script>
-</body>
-</html>
