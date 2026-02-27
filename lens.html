@@ -1,53 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creative | Sandeep Kumar</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
-      --forest: #2C3B2D;
-      --earth:  #5C4A32;
-      --cream:  #F4F0E6;
-      --parch:  #EDE8D8;
-      --ink:    #1E1E1E;
-      --mist:   #9CA89C;
-      --gold:   #C4922A;
+      /* ── DESIGN SYSTEM ──────────────────────────────
+       3 fonts, used consistently everywhere:
+       --fd  Playfair Display → titles, headings, names, blockquotes
+       --fb  Source Serif 4  → body text, descriptions, paragraphs
+       --fm  DM Mono         → labels, nav, tags, dates, buttons, captions
+
+       Colours:
+       --rose   #e6dada  dusty rose — used as gradient start, accent
+       --teal   #274046  deep teal  — used as gradient end, dark base
+       --bg     #141c1e  near-black with teal undertone — all sections below hero
+       --surface #1c2729  slightly lighter for cards / bands
+       --text   #d8d0cc  warm off-white body text
+       --dim    #7a8c8e  muted teal-grey — labels, dates
+       --gold   #c4922a  accent — links, active states
+    ──────────────────────────────────────────────── */
+      --rose: #e6dada;
+      --teal: #274046;
+      --bg: #141c1e;
+      --surface: #1c2729;
+      --text: #d8d0cc;
+      --dim: #7a8c8e;
+      --gold: #c4922a;
       --fd: 'Playfair Display', Georgia, serif;
       --fb: 'Source Serif 4', Georgia, serif;
       --fm: 'DM Mono', monospace;
       --max: 1200px;
       --nav: 64px;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--ink); color: #ccc; font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; width: 100%; }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fb);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
 
     /* NAV */
     nav {
-      position: sticky; top: 0; z-index: 100;
+      position: sticky;
+      top: 0;
+      z-index: 100;
       height: var(--nav);
-      background: rgba(30,30,30,0.96);
+      background: rgba(20, 28, 30, 0.96);
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(122, 140, 142, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 0 2.5rem;
     }
-    .nav-name { font-family: var(--fd); font-size: 1.05rem; color: #ddd; }
-    .nav-links { list-style: none; display: flex; gap: 1.8rem; }
+
+    .nav-name {
+      font-family: var(--fd);
+      font-size: 1.05rem;
+      color: var(--rose);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.8rem;
+    }
+
     .nav-links a {
-      font-family: var(--fm); font-size: 0.74rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #777;
-      border-bottom: 1px solid transparent; padding-bottom: 2px;
+      font-family: var(--fm);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
       transition: color .2s, border-color .2s;
     }
-    .nav-links a:hover { color: #ccc; }
-    .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
-    .hamburger { display: none; cursor: pointer; font-size: 1.4rem; color: #777; }
+
+    .nav-links a:hover {
+      color: var(--rose);
+    }
+
+    .nav-links a.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      color: var(--rose);
+    }
 
     /* ── PAGE HEADER ── */
     .page-header {
@@ -55,25 +132,42 @@
       margin: 0 auto;
       padding: 5rem 2.5rem 3rem;
     }
+
     .page-eyebrow {
-      font-family: var(--fm); font-size: 0.68rem;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 0.75rem;
+      font-family: var(--fm);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.75rem;
     }
+
     .page-title {
       font-family: var(--fd);
       font-size: clamp(2rem, 4vw, 3rem);
-      color: #eee; font-weight: 400;
-      margin-bottom: 1rem; line-height: 1.1;
+      background: linear-gradient(to right, var(--rose), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      line-height: 1.1;
     }
-    .page-title em { font-style: italic; color: var(--gold); }
+
+    .page-title em {
+      font-style: italic;
+      background: linear-gradient(to right, var(--rose), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
     /* the one-line philosophy */
     .page-philosophy {
       font-family: var(--fd);
-      font-size: 1.1rem; font-style: italic;
-      color: #888; max-width: 560px;
-      line-height: 1.6; margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--dim);
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
       border-left: 2px solid var(--gold);
       padding-left: 1rem;
     }
@@ -83,18 +177,34 @@
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 2.5rem 3rem;
-      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
+
     .filter-btn {
-      font-family: var(--fm); font-size: 0.7rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: var(--fm);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       padding: 0.4rem 1rem;
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #777; background: transparent;
-      cursor: pointer; transition: all .2s;
+      border: 1px solid rgba(122, 140, 142, 0.2);
+      color: var(--dim);
+      background: transparent;
+      cursor: pointer;
+      transition: all .2s;
     }
-    .filter-btn:hover { border-color: #999; color: #ccc; }
-    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: #1e1e1e; }
+
+    .filter-btn:hover {
+      border-color: var(--dim);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #1e1e1e;
+    }
 
     /* ── CHAPTER SECTIONS ── */
     .chapter {
@@ -102,25 +212,37 @@
       margin: 0 auto;
       padding: 0 2.5rem 5rem;
     }
+
     .chapter-header {
       margin-bottom: 2rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(122, 140, 142, 0.2);
     }
+
     .chapter-num {
-      font-family: var(--fm); font-size: 0.65rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 0.4rem;
+      font-family: var(--fm);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.4rem;
     }
+
     .chapter-title {
-      font-family: var(--fd); font-size: 1.6rem;
-      color: #eee; font-weight: 400;
+      font-family: var(--fd);
+      font-size: 1.6rem;
+      color: var(--rose);
+      font-weight: 400;
       margin-bottom: 0.5rem;
     }
+
     .chapter-desc {
-      font-family: var(--fb); font-size: 0.9rem;
-      color: #666; line-height: 1.7;
-      max-width: 520px; font-style: italic;
+      font-family: var(--fb);
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.7;
+      max-width: 520px;
+      font-style: italic;
     }
 
     /* ── MASONRY PHOTO GRID ──
@@ -129,20 +251,25 @@
        Tall photos and wide photos both work — the layout adapts automatically.
     */
     .grid {
-      columns: 3 280px;   /* 3 columns on desktop, collapses on mobile */
+      columns: 3 280px;
+      /* 3 columns on desktop, collapses on mobile */
       column-gap: 6px;
     }
+
     .photo-item {
-      break-inside: avoid;  /* prevents a photo from splitting across columns */
+      break-inside: avoid;
+      /* prevents a photo from splitting across columns */
       margin-bottom: 6px;
       position: relative;
       overflow: hidden;
       cursor: zoom-in;
     }
+
     .photo-item img {
       transition: transform .4s ease, filter .4s ease;
       filter: brightness(0.9);
     }
+
     .photo-item:hover img {
       transform: scale(1.03);
       filter: brightness(1);
@@ -150,15 +277,24 @@
 
     /* caption on hover */
     .photo-caption {
-      position: absolute; bottom: 0; left: 0; right: 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
       padding: 0.75rem 1rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
-      font-family: var(--fm); font-size: 0.65rem;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      opacity: 0; transition: opacity .3s ease;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+      font-family: var(--fm);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      opacity: 0;
+      transition: opacity .3s ease;
     }
-    .photo-item:hover .photo-caption { opacity: 1; }
+
+    .photo-item:hover .photo-caption {
+      opacity: 1;
+    }
 
     /* ── PLACEHOLDER TILES ──
        These are coloured boxes that stand in for your real photos.
@@ -175,71 +311,182 @@
     */
 
     /* placeholder colours — remove when adding real photos */
-    .ph { background: #2a2a2a; display: flex; align-items: center; justify-content: center; font-family: var(--fm); font-size: 0.65rem; color: #444; letter-spacing: 0.1em; }
-    .ph-tall  { height: 320px; }
-    .ph-med   { height: 220px; }
-    .ph-short { height: 160px; }
-    .ph-wide  { height: 200px; }
+    .ph {
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fm);
+      font-size: 0.65rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+
+    .ph-tall {
+      height: 320px;
+    }
+
+    .ph-med {
+      height: 220px;
+    }
+
+    .ph-short {
+      height: 160px;
+    }
+
+    .ph-wide {
+      height: 200px;
+    }
 
     /* ── LIGHTBOX ── */
     .lightbox {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(0,0,0,0.92);
-      align-items: center; justify-content: center;
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
       padding: 2rem;
     }
-    .lightbox.open { display: flex; }
+
+    .lightbox.open {
+      display: flex;
+    }
+
     .lightbox img {
-      max-height: 90vh; max-width: 90vw;
-      width: auto; height: auto;
+      max-height: 90vh;
+      max-width: 90vw;
+      width: auto;
+      height: auto;
       object-fit: contain;
     }
+
     .lightbox-close {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      font-size: 2rem; color: #888; cursor: pointer;
-      line-height: 1; transition: color .2s;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: var(--dim);
+      cursor: pointer;
+      line-height: 1;
+      transition: color .2s;
     }
-    .lightbox-close:hover { color: white; }
+
+    .lightbox-close:hover {
+      color: var(--rose);
+    }
+
     .lightbox-caption {
-      position: absolute; bottom: 1.5rem; left: 50%;
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
       transform: translateX(-50%);
-      font-family: var(--fm); font-size: 0.7rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: #666;
+      font-family: var(--fm);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
     }
 
     /* ── FOOTER ── */
     footer {
-      background: #111; color: rgba(255,255,255,0.35);
-      padding: 2rem 2.5rem; border-top: 1px solid rgba(255,255,255,0.06);
+      background: #0d1214;
+      color: var(--dim);
+      padding: 2rem 2.5rem;
+      border-top: 1px solid rgba(122, 140, 142, 0.1);
     }
+
     .footer-inner {
-      max-width: var(--max); margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
-    .footer-left { font-family: var(--fm); font-size: 0.68rem; letter-spacing: 0.05em; }
-    .footer-links { display: flex; gap: 1.25rem; }
-    .footer-links a { font-family: var(--fm); font-size: 0.7rem; color: rgba(255,255,255,0.35); transition: color .2s; }
-    .footer-links a:hover { color: white; }
+
+    .footer-left {
+      font-family: var(--fm);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .footer-links a {
+      font-family: var(--fm);
+      font-size: 0.7rem;
+      color: var(--dim);
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--rose);
+    }
 
     /* MOBILE */
     @media (max-width: 768px) {
-      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: #1e1e1e; flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-      .nav-links.open { display: flex; }
-      .hamburger { display: block; }
-      .page-header { padding: 3rem 1.5rem 2rem; }
-      .filter-bar { padding: 0 1.5rem 2rem; }
-      .chapter { padding: 0 1.5rem 3.5rem; }
-      .grid { columns: 2 160px; }
-      footer { padding: 1.5rem; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav);
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid rgba(122, 140, 142, 0.2);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .page-header {
+        padding: 3rem 1.5rem 2rem;
+      }
+
+      .filter-bar {
+        padding: 0 1.5rem 2rem;
+      }
+
+      .chapter {
+        padding: 0 1.5rem 3.5rem;
+      }
+
+      .grid {
+        columns: 2 160px;
+      }
+
+      footer {
+        padding: 1.5rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
     }
+
     @media (max-width: 480px) {
-      .grid { columns: 1; }
+      .grid {
+        columns: 1;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <nav id="navbar">
@@ -426,7 +673,7 @@
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
     <span class="lightbox-close" onclick="closeLightbox()">✕</span>
-    <img id="lightbox-img" src="" alt=""/>
+    <img id="lightbox-img" src="" alt="" />
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
@@ -446,7 +693,7 @@
   <script>
     // ── Mobile nav ──
     const ham = document.getElementById('ham');
-    const nl  = document.getElementById('navLinks');
+    const nl = document.getElementById('navLinks');
     ham.addEventListener('click', () => {
       nl.classList.toggle('open');
       ham.textContent = nl.classList.contains('open') ? '✕' : '☰';
@@ -467,7 +714,7 @@
       });
 
       // show/hide chapter headers
-      ['wildlife','street','art'].forEach(c => {
+      ['wildlife', 'street', 'art'].forEach(c => {
         const chapter = document.getElementById('chapter-' + c);
         if (cat === 'all' || cat === c) {
           chapter.style.display = 'block';
@@ -495,7 +742,7 @@
 
     function closeLightbox(e) {
       if (e && e.target !== document.getElementById('lightbox') &&
-          !e.target.classList.contains('lightbox-close')) return;
+        !e.target.classList.contains('lightbox-close')) return;
       document.getElementById('lightbox').classList.remove('open');
       document.body.style.overflow = '';
     }
@@ -511,4 +758,5 @@
     });
   </script>
 </body>
+
 </html>
