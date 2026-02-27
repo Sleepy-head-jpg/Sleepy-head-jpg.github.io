@@ -432,7 +432,7 @@
         <span class="footer-sub">Ecologist · Naturalist · Photographer</span>
       </div>
       <div class="footer-links">
-        <a href="/cdn-cgi/l/email-protection#4c3f277e7d213f7c797f0c25253f293e272320622d2f622522">✉ Email</a>
+        <a href="mailto:sk21ms053@iiserkol.ac.in">✉ Email</a>
         <a href="https://ebird.org/profile/MTk1NzE3OQ/world" target="_blank">🐦 eBird</a>
         <a href="https://www.instagram.com/ig_sandeep.3/" target="_blank">📷 Instagram</a>
         <a href="https://x.com/IgnoramusNWords" target="_blank">𝕏 Twitter</a>
@@ -442,7 +442,7 @@
     <p class="footer-bottom">Built with curiosity · Hosted free on GitHub Pages</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     const ham = document.getElementById('ham');
     const nl  = document.getElementById('navLinks');
     ham.addEventListener('click', () => {
@@ -476,3 +476,9 @@
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
     window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.boxShadow =
+        scrollY > 40 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
+    });
+  </script>
+</body>
+</html>
