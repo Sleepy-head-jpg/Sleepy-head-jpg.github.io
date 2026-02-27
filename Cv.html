@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CV | Sandeep Kumar</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥/text></svg>">
+  <title>CV — Sandeep Kumar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -78,34 +78,11 @@
       background: #e8e4e0;
     }
 
-    /* MOBILE — swap embed for a download-only view */
-    .mobile-fallback {
-      display: none;
-      flex: 1;
-      align-items: center; justify-content: center;
-      flex-direction: column; gap: 1rem;
-      text-align: center; padding: 3rem 2rem;
-    }
-    .mobile-fallback p {
-      font-size: 0.8rem; letter-spacing: 0.05em;
-      color: var(--mist); line-height: 1.7;
-    }
-    .btn-dl-big {
-      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--cream); background: var(--forest);
-      border: 1px solid var(--forest);
-      padding: 0.75rem 2rem; transition: all .2s;
-    }
-    .btn-dl-big:hover { background: transparent; color: var(--forest); }
-
     @media (max-width: 768px) {
       .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: var(--cream); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(92,74,50,0.15); }
       .nav-links.open { display: flex; }
       .hamburger { display: block; }
       .cv-bar { padding: 0.75rem 1.5rem; }
-      /* on mobile, PDF embeds are awkward — show download button instead */
-      .pdf-frame { display: none; }
-      .mobile-fallback { display: flex; }
     }
   </style>
 </head>
@@ -115,37 +92,40 @@
     <span class="nav-name">Sandeep Kumar</span>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
-      <li><a href="fieldwork.html">Projects</a></li>
-      <li><a href="Cv.html" class="active">CV</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="fieldwork.html">Field Work</a></li>
       <li><a href="publications.html">Publications</a></li>
-      <li><a href="lens.html">Creative</a></li>
       <li><a href="anecdotes.html">Anecdotes</a></li>
+      <li><a href="lens.html">Through the Lens</a></li>
+      <li><a href="cv.html" class="active">CV</a></li>
     </ul>
     <span class="hamburger" id="ham">☰</span>
   </nav>
 
   <!-- slim bar: title + updated date + download -->
   <div class="cv-bar">
-    <span class="cv-bar-title">Curriculum Vitae</span>
+    <span class="cv-bar-title">Curriculum Vitae — Sandeep Kumar</span>
     <div class="cv-bar-right">
       <span class="cv-updated">Last updated: May 2025</span>
       <!-- change href to your actual PDF filename once uploaded -->
-      <a href="sandeep-cv.pdf" class="btn-dl" download>↓ Download</a>
+      <a href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID" class="btn-dl">↓ Download</a>
     </div>
   </div>
 
-  <!-- PDF fills the rest of the screen -->
-  <embed
+  <!--
+    HOW TO SET THIS UP — 3 steps:
+    1. Upload your CV PDF to Google Drive
+    2. Right-click → Share → "Anyone with the link can view"
+    3. Copy the share link:  https://drive.google.com/file/d/XXXXXXXXXXXXXXXX/view
+    4. Paste just the ID (XXXXXXXXXXXXXXXX) in place of YOUR_FILE_ID below — in both places
+    Works on desktop and mobile. To update CV: replace the file in Drive, embed auto-updates.
+  -->
+  <iframe
     class="pdf-frame"
-    src="sandeep-cv.pdf"
-    type="application/pdf"
-  />
-
-  <!-- shown only on mobile where embed doesn't work well -->
-  <div class="mobile-fallback">
-    <p>PDF preview works best on desktop.<br>Tap below to open or download the CV directly.</p>
-    <a href="sandeep-cv.pdf" class="btn-dl-big" download>↓ Download CV (PDF)</a>
-  </div>
+    src="https://drive.google.com/file/d/YOUR_FILE_ID/preview"
+    allow="autoplay"
+    allowfullscreen
+  ></iframe>
 
   <script>
     const ham = document.getElementById('ham');
