@@ -1,117 +1,151 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Sandeep Kumar</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
+  <!-- Betania Patmos added -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Betania+Patmos&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap"
+    rel="stylesheet" />
   <style>
-
     :root {
-      /* ── Fonts (3 only, consistent across all pages) ── */
-      --fd: 'Playfair Display', Georgia, serif;   /* headings, titles, display */
-      --fb: 'Source Serif 4', Georgia, serif;      /* body text */
-      --fm: 'DM Mono', monospace;                  /* labels, tags, mono */
+      --fd: 'Playfair Display', Georgia, serif;
+      --fb: 'Source Serif 4', Georgia, serif;
+      --fm: 'DM Mono', monospace;
 
-      /* ── Base palette (shared everywhere) ── */
-      --forest: #2C3B2D;
-      --earth:  #5C4A32;
-      --cream:  #F4F0E6;
-      --parch:  #EDE8D8;
-      --ink:    #1E1E1E;
-      --mist:   #9CA89C;
-      --gold:   #C4922A;
+      /* ── Palette — synced exactly with index.html ── */
+      --rose:    #e6dada;
+      --teal:    #274046;
+      --bg:      #141c1e;
+      --surface: #1c2729;
+      --text:    #d8d0cc;
+      --dim:     #7a8c8e;
+      --gold:    #c4922a;
 
-      --nav: 64px;
-       }
-    
+      --nav: 60px;
+      --max: 1100px;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--cream); color: var(--ink); font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fb);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
     a { color: inherit; text-decoration: none; }
     img { display: block; width: 100%; }
 
-    /* NAV */
+    /* ── NAV — synced with index.html ── */
     nav {
       position: sticky; top: 0; z-index: 100;
       height: var(--nav);
-      background: rgba(244,240,230,0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(92,74,50,0.15);
+      background: rgba(20,28,30,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(230,218,218,0.08);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2.5rem;
     }
-    .nav-name { font-family: var(--fd); font-size: 1.05rem; color: var(--forest); }
+
+    .nav-name {
+      font-family: var(--fd);
+      font-size: 1rem;
+      color: var(--rose);
+      letter-spacing: 0.02em;
+    }
+
     .nav-links { list-style: none; display: flex; gap: 1.8rem; }
     .nav-links a {
-      font-family: var(--fm); font-size: 0.74rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--earth);
+      font-family: var(--fm); font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim);
       border-bottom: 1px solid transparent; padding-bottom: 2px;
       transition: color .2s, border-color .2s;
     }
-    .nav-links a:hover { color: var(--forest); }
-    .nav-links a.active { color: var(--forest); border-bottom-color: var(--forest); }
-    .hamburger { display: none; cursor: pointer; font-size: 1.4rem; color: var(--forest); }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-links a.active { color: var(--rose); border-bottom-color: var(--rose); }
+    .hamburger { display: none; cursor: pointer; font-size: 1.3rem; color: var(--dim); }
 
-    /* PAGE HEADER */
+    /* ── PAGE HEADER — rose→teal gradient matching index hero palette ── */
     .page-header {
+      padding: 5rem 2.5rem 3.5rem;
+      background: linear-gradient(160deg, #e6dada 0%, #b8a8b0 25%, #4a6068 60%, #274046 100%);
+      position: relative;
+    }
+    /* fade into --bg at bottom, matching index hero */
+    .page-header::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+    .page-header-inner {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 5rem 2.5rem 3.5rem;
-      border-bottom: 1px solid rgba(92,74,50,0.12);
+      position: relative; z-index: 2;
     }
+
     .page-eyebrow {
       font-family: var(--fm); font-size: 0.68rem;
       letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 0.75rem;
+      color: rgba(230,218,218,0.5); margin-bottom: 0.75rem;
     }
+
     .page-title {
-      font-family: var(--fd); font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--forest); font-weight: 400;
-      margin-bottom: 1rem; line-height: 1.1;
+      font-family: var(--fd);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #f5f0ee;
+      font-weight: 400;
+      line-height: 1.1; margin-bottom: 1rem;
     }
-    .page-title em { font-style: italic; color: var(--earth); }
+    .page-title em {
+      font-style: italic;
+      color: rgba(245,240,238,0.75);
+    }
+
     .page-desc {
-      font-size: 0.98rem; color: #666;
-      max-width: 560px; line-height: 1.8;
+      font-family: var(--fb);
+      font-size: 0.98rem;
+      color: rgba(245,240,238,0.65);
+      max-width: 560px;
+      line-height: 1.8;
       font-style: italic;
     }
 
-    /* SECTION WRAPPER */
+    /* ── SECTIONS ── */
     .section {
       max-width: var(--max);
       margin: 0 auto;
       padding: 4rem 2.5rem;
     }
     .section + .section {
-      border-top: 1px solid rgba(92,74,50,0.12);
+      border-top: 1px solid rgba(230,218,218,0.06);
     }
+
     .section-eyebrow {
       font-family: var(--fm); font-size: 0.68rem;
       letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--mist); margin-bottom: 0.5rem;
+      color: var(--dim); margin-bottom: 0.5rem;
     }
     .section-title {
-      font-family: var(--fd); font-size: clamp(1.3rem, 2.5vw, 1.9rem);
-      color: var(--forest); font-weight: 400;
+      font-family: var(--fd);
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      color: var(--rose); font-weight: 400;
       margin-bottom: 2.5rem; line-height: 1.2;
     }
     .section-title em { font-style: italic; }
 
-    /* ── CURRENT PROJECT CARDS ──
-       Large, prominent. Full photo, generous text.
-       Two columns on desktop.
-
-       HOW TO ADD A CURRENT PROJECT:
-       Copy one .card-current block. Fill in:
-       - .card-img: add style="background-image:url('photo.jpg')" for a real photo
-       - .card-tag: subject area + date range
-       - h3: project title
-       - p: 2-3 sentence description
-       - .card-links: add href to a detail page if you have one
-    */
+    /* ── CURRENT PROJECT CARDS ── */
     .grid-current {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
@@ -119,46 +153,46 @@
     }
 
     .card-current {
-      display: flex;
-      flex-direction: column;
-      background: var(--parch);
-      border: 1px solid rgba(92,74,50,0.12);
+      display: flex; flex-direction: column;
+      background: var(--surface);
+      border: 1px solid rgba(230,218,218,0.08);
       overflow: hidden;
       transition: box-shadow .3s ease;
     }
-    .card-current:hover { box-shadow: 0 12px 40px rgba(44,59,45,0.13); }
+    .card-current:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
 
     .card-img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background-size: cover;
-      background-position: center;
+      width: 100%; aspect-ratio: 16/9;
+      background-size: cover; background-position: center;
     }
-    /* placeholder gradient — replace with background-image:url('...') */
-    .img-1 { background: linear-gradient(135deg, #1a2e1b, #4a6b4c); }
-    .img-2 { background: linear-gradient(135deg, #1a2838, #2c5a6e); }
-    .img-3 { background: linear-gradient(135deg, #2e2218, #6b4a2c); }
-    .img-4 { background: linear-gradient(135deg, #1e2e1a, #5a7a3c); }
-    .img-5 { background: linear-gradient(135deg, #2e1a2a, #6b3c6b); }
+    .img-1 { background: linear-gradient(135deg, var(--teal), #1a2e1b); }
+    .img-2 { background: linear-gradient(135deg, var(--teal), #1a2838); }
+    .img-3 { background: linear-gradient(135deg, var(--teal), #2e2218); }
+    .img-4 { background: linear-gradient(135deg, var(--teal), #1e2e1a); }
+    .img-5 { background: linear-gradient(135deg, var(--teal), #2e1a2a); }
 
-    .card-body { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+    .card-body {
+      padding: 1.75rem; flex: 1;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
 
     .card-tag {
       font-family: var(--fm); font-size: 0.68rem;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--mist);
+      color: var(--dim);
     }
     .card-tag .dot { color: var(--gold); margin: 0 0.3rem; }
 
     .card-current h3 {
       font-family: var(--fd); font-size: 1.25rem;
-      color: var(--forest); font-weight: 400; line-height: 1.3;
-      margin: 0.2rem 0 0.5rem;
+      color: var(--rose); font-weight: 400;
+      line-height: 1.3; margin: 0.2rem 0 0.5rem;
     }
     .card-current p {
-      font-size: 0.9rem; color: #555; line-height: 1.75;
-      flex: 1;
+      font-size: 0.9rem; color: var(--text);
+      line-height: 1.75; flex: 1;
     }
+
     .card-links {
       display: flex; gap: 1rem; margin-top: 1.25rem;
       flex-wrap: wrap; align-items: center;
@@ -166,89 +200,84 @@
     .card-link {
       font-family: var(--fm); font-size: 0.72rem;
       letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--earth); border-bottom: 1px solid currentColor;
+      color: var(--gold); border-bottom: 1px solid currentColor;
       padding-bottom: 2px; transition: color .2s;
     }
-    .card-link:hover { color: var(--forest); }
+    .card-link:hover { color: var(--rose); }
 
-    /* active pulse for current projects */
     .status-dot {
       display: inline-flex; align-items: center; gap: 0.4rem;
       font-family: var(--fm); font-size: 0.67rem;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim);
     }
     .status-dot::before {
       content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: #6db36d;
-      animation: pulse 2s infinite;
+      background: var(--gold); animation: pulse 2s infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
-      50%       { opacity: 0.3; }
+      50% { opacity: 0.3; }
     }
 
-    /* ── PAST PROJECT CARDS ──
-       More compact — horizontal layout (photo left, text right).
-       Shows more projects without dominating the page.
-
-       HOW TO ADD A PAST PROJECT:
-       Copy one .card-past block. Fill in the same fields.
-       Change the .card-img class to img-3, img-4, img-5 etc for variety.
-    */
-    .grid-past {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    /* ── PAST PROJECT CARDS ── */
+    .grid-past { display: flex; flex-direction: column; gap: 0; }
 
     .card-past {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      border: 1px solid rgba(92,74,50,0.12);
-      border-top: none;
-      overflow: hidden;
+      display: grid; grid-template-columns: 240px 1fr;
+      border: 1px solid rgba(230,218,218,0.06);
+      border-top: none; overflow: hidden;
       transition: background .25s ease;
-      background: white;
+      background: var(--surface);
     }
-    .grid-past .card-past:first-child { border-top: 1px solid rgba(92,74,50,0.12); }
-    .card-past:hover { background: var(--parch); }
-
-    .card-past .card-img {
-      aspect-ratio: unset;
-      min-height: 180px;
-      height: 100%;
-    }
-
-    .card-past .card-body {
-      padding: 1.5rem 1.75rem;
-      gap: 0.3rem;
-    }
+    .grid-past .card-past:first-child { border-top: 1px solid rgba(230,218,218,0.06); }
+    .card-past:hover { background: rgba(28,39,41,0.8); }
+    .card-past .card-img { aspect-ratio: unset; min-height: 180px; height: 100%; }
+    .card-past .card-body { padding: 1.5rem 1.75rem; gap: 0.3rem; }
     .card-past h3 {
       font-family: var(--fd); font-size: 1.1rem;
-      color: var(--forest); font-weight: 400; line-height: 1.3;
+      color: var(--rose); font-weight: 400; line-height: 1.3;
       margin: 0.2rem 0 0.4rem;
     }
-    .card-past p {
-      font-size: 0.88rem; color: #666; line-height: 1.7;
+    .card-past p { font-size: 0.88rem; color: var(--text); line-height: 1.7; }
+
+    /* ── FOOTER — synced with index.html ── */
+    footer {
+      background: #0e1517;
+      padding: 2.5rem 2.5rem 1.5rem;
+      border-top: 1px solid rgba(230,218,218,0.06);
+    }
+    .footer-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 2rem; flex-wrap: wrap;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(230,218,218,0.06);
+    }
+    .footer-name {
+      font-family: var(--fd); font-size: 0.95rem;
+      color: var(--rose); display: block; margin-bottom: 0.2rem;
+    }
+    .footer-sub { font-family: var(--fm); font-size: 0.68rem; color: var(--dim); }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a {
+      font-family: var(--fm); font-size: 0.7rem;
+      color: var(--dim); transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--rose); }
+    .footer-bottom {
+      max-width: var(--max); margin: 1.25rem auto 0;
+      font-family: var(--fm); font-size: 0.62rem;
+      color: rgba(230,218,218,0.18); text-align: center;
     }
 
-    /* FOOTER */
-    footer { background: var(--ink); color: rgba(255,255,255,0.6); padding: 3rem 2.5rem 1.5rem; }
-    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .footer-name { font-family: var(--fd); font-size: 1rem; color: white; display: block; margin-bottom: 0.25rem; }
-    .footer-sub  { font-family: var(--fm); font-size: 0.7rem; letter-spacing: 0.04em; }
-    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
-    .footer-links a { font-family: var(--fm); font-size: 0.72rem; color: rgba(255,255,255,0.45); transition: color .2s; }
-    .footer-links a:hover { color: white; }
-    .footer-bottom { max-width: var(--max); margin: 1.25rem auto 0; font-family: var(--fm); font-size: 0.65rem; color: rgba(255,255,255,0.22); text-align: center; }
-
-    /* REVEAL ANIMATION */
+    /* ── ANIMATIONS ── */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.on { opacity: 1; transform: translateY(0); }
 
-    /* MOBILE */
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: var(--cream); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(92,74,50,0.15); }
+      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: rgba(20,28,30,0.98); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(230,218,218,0.08); }
       .nav-links.open { display: flex; }
       .hamburger { display: block; }
       .page-header { padding: 3rem 1.5rem 2.5rem; }
@@ -256,50 +285,43 @@
       .grid-current { grid-template-columns: 1fr; }
       .card-past { grid-template-columns: 1fr; }
       .card-past .card-img { min-height: 160px; aspect-ratio: 16/9; height: auto; }
-      footer { padding: 2.5rem 1.5rem 1.5rem; }
+      footer { padding: 2rem 1.5rem 1.5rem; }
       .footer-inner { flex-direction: column; }
     }
   </style>
 </head>
+
 <body>
 
   <nav id="navbar">
     <span class="nav-name">Sandeep Kumar</span>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
+      <li><a href="fieldwork.html" class="active">Projects</a></li>
       <li><a href="publications.html">Publications</a></li>
-      <li><a href="fieldwork.html" class="active"></a></li>
-      <li><a href="Cv.html">CV</a></li>
-      <li><a href="lens.html">Creative</a></li>
       <li><a href="anecdotes.html">Anecdotes</a></li>
+      <li><a href="lens.html">Creative</a></li>
+      <li><a href="cv.html">CV</a></li>
     </ul>
     <span class="hamburger" id="ham">☰</span>
   </nav>
 
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <p class="page-eyebrow">Research · Projects</p>
-    <h1 class="page-title">Field <em>Work</em></h1>
-    <p class="page-desc">
-      Questions I've stopped for it.
-    </p>
+    <div class="page-header-inner">
+      <p class="page-eyebrow">Research · Projects</p>
+      <h1 class="page-title">Field <em>Work</em></h1>
+      <p class="page-desc">Questions I've stopped for.</p>
+    </div>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       CURRENT PROJECTS
-       Large cards, two columns, green pulse dot
-  ═══════════════════════════════════════════ -->
+  <!-- CURRENT PROJECTS -->
   <div class="section">
     <p class="section-eyebrow">Ongoing</p>
     <h2 class="section-title">Current <em>Projects</em></h2>
 
     <div class="grid-current">
 
-      <!--
-        PROJECT CARD — CURRENT
-        To add a real photo: change class="card-img img-1" to:
-        <div class="card-img" style="background-image:url('photo.jpg');background-size:cover">
-      -->
       <div class="card-current reveal">
         <div class="card-img img-1"></div>
         <div class="card-body">
@@ -344,22 +366,13 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       PAST PROJECTS
-       Compact horizontal cards, stacked list
-  ═══════════════════════════════════════════ -->
+  <!-- PAST PROJECTS -->
   <div class="section">
     <p class="section-eyebrow">Completed</p>
     <h2 class="section-title">Past <em>Projects</em></h2>
 
     <div class="grid-past">
 
-      <!--
-        PROJECT CARD — PAST
-        Same structure, more compact.
-        Add photo: style="background-image:url('photo.jpg');background-size:cover;background-position:center"
-        to the .card-img div.
-      -->
       <div class="card-past reveal">
         <div class="card-img img-3"></div>
         <div class="card-body">
@@ -428,7 +441,6 @@
   </footer>
 
   <script>
-    // Mobile nav
     const ham = document.getElementById('ham');
     const nl  = document.getElementById('navLinks');
     ham.addEventListener('click', () => {
@@ -436,7 +448,6 @@
       ham.textContent = nl.classList.contains('open') ? '✕' : '☰';
     });
 
-    // Scroll reveal
     const ro = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -447,11 +458,11 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-    // Nav shadow
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').style.boxShadow =
-        scrollY > 40 ? '0 2px 18px rgba(0,0,0,0.07)' : 'none';
+        scrollY > 40 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
     });
   </script>
 </body>
+
 </html>
