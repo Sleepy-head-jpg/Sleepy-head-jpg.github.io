@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Himalayan Flock Dynamics | Sandeep Kumar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Betania+Patmos&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --fd: 'Playfair Display', Georgia, serif;
+      --fb: 'Source Serif 4', Georgia, serif;
+      --fm: 'DM Mono', monospace;
+      --rose:    #e6dada;
+      --teal:    #274046;
+      --bg:      #141c1e;
+      --surface: #1c2729;
+      --text:    #d8d0cc;
+      --dim:     #7a8c8e;
+      --gold:    #c4922a;
+      --nav: 60px;
+      --max: 780px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav);
+      background: rgba(20,28,30,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(230,218,218,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .nav-name { font-family: var(--fd); font-size: 1rem; color: var(--rose); letter-spacing: 0.02em; }
+    .nav-links { list-style: none; display: flex; gap: 1.8rem; }
+    .nav-links a { font-family: var(--fm); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color .2s, border-color .2s; }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-links a.active { color: var(--rose); border-bottom-color: var(--rose); }
+    .hamburger { display: none; cursor: pointer; font-size: 1.3rem; color: var(--dim); }
+
+    /* ── HERO IMAGE ── */
+    .project-hero {
+      width: 100%;
+      height: 480px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      /* ↓ Replace this gradient with your actual photo:
+         background-image: url('images/flock-hero.jpg'); */
+      background: linear-gradient(160deg, #1a2e1b 0%, #274046 60%, #141c1e 100%);
+    }
+    .project-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(20,28,30,0.1) 40%, rgba(20,28,30,0.85) 100%);
+    }
+    .hero-caption {
+      position: absolute; bottom: 2rem; left: 2.5rem; right: 2.5rem;
+      z-index: 2;
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ── BACK LINK ── */
+    .back-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2rem 2.5rem 0;
+    }
+    .back-link {
+      font-family: var(--fm); font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim); transition: color .2s;
+    }
+    .back-link:hover { color: var(--rose); }
+
+    /* ── ARTICLE ── */
+    article {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.5rem 2.5rem 5rem;
+    }
+
+    .proj-eyebrow {
+      font-family: var(--fm); font-size: 0.68rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 0.6rem;
+    }
+
+    .proj-title {
+      font-family: var(--fd);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--rose); font-weight: 400;
+      line-height: 1.15; margin-bottom: 1.5rem;
+    }
+
+    /* meta row: status + date + location */
+    .proj-meta {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid rgba(230,218,218,0.06);
+      border-bottom: 1px solid rgba(230,218,218,0.06);
+      margin-bottom: 2.5rem;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .meta-label { font-family: var(--fm); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); }
+    .meta-value { font-family: var(--fb); font-size: 0.9rem; color: var(--text); }
+
+    .status-dot {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--fb); font-size: 0.9rem; color: var(--text);
+    }
+    .status-dot::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold); animation: pulse 2s infinite; flex-shrink: 0;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+    /* body text */
+    .proj-body { display: flex; flex-direction: column; gap: 2rem; }
+
+    .proj-section-label {
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+
+    .proj-body h2 {
+      font-family: var(--fd); font-size: 1.25rem;
+      color: var(--rose); font-weight: 400;
+      margin-bottom: 0.6rem; line-height: 1.3;
+    }
+
+    .proj-body p {
+      font-family: var(--fb); font-size: 0.97rem;
+      color: var(--text); line-height: 1.85;
+    }
+
+    /* inline image with caption */
+    .proj-figure {
+      width: 100%; border: 1px solid rgba(230,218,218,0.06);
+      overflow: hidden;
+    }
+    .proj-figure img { width: 100%; display: block; }
+    .proj-figure figcaption {
+      padding: 0.75rem 1rem;
+      font-family: var(--fm); font-size: 0.63rem;
+      letter-spacing: 0.08em; color: var(--dim);
+      background: var(--surface);
+    }
+
+    /* divider */
+    .proj-divider {
+      border: none;
+      border-top: 1px solid rgba(230,218,218,0.06);
+    }
+
+    /* collaborators / tags band */
+    .proj-tags {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+    .proj-tag {
+      font-family: var(--fm); font-size: 0.67rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid rgba(230,218,218,0.1);
+      padding: 0.3rem 0.7rem;
+    }
+
+    /* ── FOOTER ── */
+    footer { background: #0e1517; padding: 2.5rem 2.5rem 1.5rem; border-top: 1px solid rgba(230,218,218,0.06); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(230,218,218,0.06); }
+    .footer-name { font-family: var(--fd); font-size: 0.95rem; color: var(--rose); display: block; margin-bottom: 0.2rem; }
+    .footer-sub { font-family: var(--fm); font-size: 0.68rem; color: var(--dim); }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a { font-family: var(--fm); font-size: 0.7rem; color: var(--dim); transition: color .2s; }
+    .footer-links a:hover { color: var(--rose); }
+    .footer-bottom { max-width: 1100px; margin: 1.25rem auto 0; font-family: var(--fm); font-size: 0.62rem; color: rgba(230,218,218,0.18); text-align: center; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: rgba(20,28,30,0.98); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(230,218,218,0.08); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: block; }
+      .project-hero { height: 260px; }
+      article, .back-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { padding: 2rem 1.5rem 1.5rem; }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <span class="nav-name">Sandeep Kumar</span>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="fieldwork.html" class="active">Projects</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="anecdotes.html">Anecdotes</a></li>
+      <li><a href="lens.html">Creative</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+    <span class="hamburger" id="ham">☰</span>
+  </nav>
+
+  <!-- HERO IMAGE
+       Replace the gradient with your own photo:
+       style="background-image: url('images/flock-hero.jpg')"
+  -->
+  <div class="project-hero">
+    <span class="hero-caption">Uttarakhand · Mixed-species flock, dawn transect · 2025</span>
+  </div>
+
+  <!-- BACK LINK -->
+  <div class="back-wrap">
+    <a href="fieldwork.html" class="back-link">← Back to Projects</a>
+  </div>
+
+  <!-- ARTICLE BODY -->
+  <article>
+    <p class="proj-eyebrow">Community Ecology · Master's Research</p>
+    <h1 class="proj-title">Himalayan Mixed-Species<br>Flock Dynamics</h1>
+
+    <!-- META ROW -->
+    <div class="proj-meta">
+      <div class="meta-item">
+        <span class="meta-label">Status</span>
+        <span class="meta-value status-dot">Active — Ongoing</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Duration</span>
+        <span class="meta-value">2024 – present</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Location</span>
+        <span class="meta-value">Uttarakhand, India</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Institution</span>
+        <span class="meta-value">IISER Kolkata</span>
+      </div>
+    </div>
+
+    <!-- BODY SECTIONS — fill these in with your actual content -->
+    <div class="proj-body">
+
+      <div>
+        <p class="proj-section-label">Overview</p>
+        <h2>Why do birds of different species flock together?</h2>
+        <p>
+          Mixed-species bird flocks are one of the most striking phenomena in tropical and
+          subtropical forests. Dozens of birds — sometimes more than a dozen species —
+          move through the canopy as a single coordinated unit. My research asks what holds
+          these assemblages together, who leads them, and what happens when the forest they
+          depend on starts to change.
+        </p>
+      </div>
+
+      <hr class="proj-divider">
+
+      <!-- INLINE FIGURE — replace src with your own image -->
+      <!--
+      <figure class="proj-figure">
+        <img src="images/flock-composition.jpg" alt="Flock composition chart">
+        <figcaption>Flock composition across three elevational bands · Uttarakhand · 2025</figcaption>
+      </figure>
+      -->
+
+      <div>
+        <p class="proj-section-label">Questions</p>
+        <h2>What I'm trying to answer</h2>
+        <p>
+          The core questions driving this work are: Who are the nuclear species — the individuals
+          other birds follow — in oak forests at different elevations? How does forest disturbance
+          (logging, edge effects, plantation encroachment) reshape flock structure and species
+          composition? And can flock integrity serve as a rapid indicator of habitat quality,
+          something measurable in a morning's walk?
+        </p>
+      </div>
+
+      <hr class="proj-divider">
+
+      <div>
+        <p class="proj-section-label">Methods</p>
+        <h2>How I'm going about it</h2>
+        <p>
+          I conduct point-count and transect surveys at dawn across an elevational gradient
+          in Uttarakhand, recording flock composition, size, and movement. Each flock encounter
+          is logged with species list, nuclear species identity, habitat type, and disturbance
+          index. Playback experiments are used to probe social cohesion between species pairs.
+          Data analysis draws on network theory — treating each flock as a dynamic social graph.
+        </p>
+      </div>
+
+      <hr class="proj-divider">
+
+      <div>
+        <p class="proj-section-label">Early Findings</p>
+        <h2>What the data is starting to say</h2>
+        <p>
+          Early results suggest that nuclear species identity shifts with elevation and
+          disturbance level — a pattern that, if robust, has implications for how we
+          think about indicator species in montane systems. More field seasons needed
+          before anything firmer can be said.
+        </p>
+      </div>
+
+      <hr class="proj-divider">
+
+      <div>
+        <p class="proj-section-label">Keywords</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Mixed-species flocks</span>
+          <span class="proj-tag">Community ecology</span>
+          <span class="proj-tag">Himalayan birds</span>
+          <span class="proj-tag">Nuclear species</span>
+          <span class="proj-tag">Disturbance ecology</span>
+          <span class="proj-tag">Oak forests</span>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <span class="footer-name">Sandeep Kumar</span>
+        <span class="footer-sub">Ecologist · Naturalist · Photographer</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:sk21ms053@iiserkol.ac.in">✉ Email</a>
+        <a href="https://ebird.org/profile/MTk1NzE3OQ/world" target="_blank">🐦 eBird</a>
+        <a href="https://www.instagram.com/ig_sandeep.3/" target="_blank">📷 Instagram</a>
+        <a href="https://x.com/IgnoramusNWords" target="_blank">𝕏 Twitter</a>
+      </div>
+    </div>
+    <p class="footer-bottom">Built with curiosity · Hosted free on GitHub Pages</p>
+  </footer>
+
+  <script>
+    const ham = document.getElementById('ham');
+    const nl  = document.getElementById('navLinks');
+    ham.addEventListener('click', () => {
+      nl.classList.toggle('open');
+      ham.textContent = nl.classList.contains('open') ? '✕' : '☰';
+    });
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.boxShadow =
+        scrollY > 40 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
+    });
+  </script>
+</body>
+</html>
