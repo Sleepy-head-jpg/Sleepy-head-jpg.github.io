@@ -4,44 +4,250 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Anecdotes | Sandeep Kumar</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="about.css" />
-  <link rel="stylesheet" href="anecdotes.css" />
-   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Betania+Patmos&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --fd: 'Playfair Display', Georgia, serif;
+      --fb: 'Source Serif 4', Georgia, serif;
+      --fm: 'DM Mono', monospace;
+      --rose:    #e6dada;
+      --teal:    #274046;
+      --bg:      #141c1e;
+      --surface: #1c2729;
+      --text:    #d8d0cc;
+      --dim:     #7a8c8e;
+      --gold:    #c4922a;
+      --nav: 60px;
+      --max: 1100px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav);
+      background: rgba(20,28,30,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(230,218,218,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .nav-name { font-family: var(--fd); font-size: 1rem; color: var(--rose); letter-spacing: 0.02em; }
+    .nav-links { list-style: none; display: flex; gap: 1.8rem; }
+    .nav-links a {
+      font-family: var(--fm); font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim);
+      border-bottom: 1px solid transparent; padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-links a.active { color: var(--rose); border-bottom-color: var(--rose); }
+    .hamburger { display: none; cursor: pointer; font-size: 1.3rem; color: var(--dim); }
+
+    /* ── PAGE HEADER — same rose→teal gradient as fieldwork ── */
+    .page-header {
+      padding: 5rem 2.5rem 3.5rem;
+      background: linear-gradient(160deg, #e6dada 0%, #b8a8b0 25%, #4a6068 60%, #274046 100%);
+      position: relative;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+    .page-header-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      position: relative; z-index: 2;
+    }
+    .page-eyebrow {
+      font-family: var(--fm); font-size: 0.68rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(230,218,218,0.5); margin-bottom: 0.75rem;
+    }
+    .page-title {
+      font-family: var(--fd);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #f5f0ee; font-weight: 400;
+      line-height: 1.1; margin-bottom: 1rem;
+    }
+    .page-title em { font-style: italic; color: rgba(245,240,238,0.75); }
+    .page-desc {
+      font-family: var(--fb); font-size: 0.98rem;
+      color: rgba(245,240,238,0.65);
+      max-width: 560px; line-height: 1.8; font-style: italic;
+    }
+
+    /* ── POSTS CONTAINER ── */
+    .anecdotes-container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 4rem 2.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* ── FEATURED POST (large, full-width) ── */
+    .post-card.featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--surface);
+      border: 1px solid rgba(230,218,218,0.08);
+      overflow: hidden;
+      transition: box-shadow .3s ease;
+      margin-bottom: 2px;
+    }
+    .post-card.featured:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+
+    /* ── POST GRID (smaller cards) ── */
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+    }
+    .post-card {
+      display: flex; flex-direction: column;
+      background: var(--surface);
+      border: 1px solid rgba(230,218,218,0.08);
+      overflow: hidden;
+      transition: box-shadow .3s ease;
+    }
+    .post-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+
+    /* ── POST IMAGE ── */
+    .post-img {
+      width: 100%;
+      background-size: cover; background-position: center;
+    }
+    .post-card.featured .post-img { aspect-ratio: unset; min-height: 100%; height: 100%; }
+    .post-card:not(.featured) .post-img { aspect-ratio: 16/9; }
+
+    /* placeholder gradients — replace with background-image:url('...') */
+    .post-img-1 { background: linear-gradient(160deg, var(--teal), #1a2e1b); }
+    .post-img-2 { background: linear-gradient(160deg, var(--teal), #1a2838); }
+    .post-img-3 { background: linear-gradient(160deg, var(--teal), #2e2218); }
+    .post-img-4 { background: linear-gradient(160deg, var(--teal), #2e1a2a); }
+
+    /* ── POST CONTENT ── */
+    .post-content {
+      padding: 1.75rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      flex: 1;
+    }
+    .post-card.featured .post-content { padding: 2.5rem; justify-content: center; }
+
+    .post-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .post-tag {
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .post-date {
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.08em; color: var(--dim);
+    }
+    .post-date::before { content: '·'; margin-right: 0.75rem; color: var(--dim); }
+
+    .post-content h2 {
+      font-family: var(--fd); font-weight: 400;
+      color: var(--rose); line-height: 1.25;
+    }
+    .post-card.featured .post-content h2 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); }
+    .post-card:not(.featured) .post-content h2 { font-size: 1.1rem; }
+
+    .post-content h2 a { transition: color .2s; }
+    .post-content h2 a:hover { color: #f5f0ee; }
+
+    .post-excerpt {
+      font-family: var(--fb); font-size: 0.9rem;
+      color: var(--text); line-height: 1.75;
+      flex: 1;
+    }
+    .post-card.featured .post-excerpt { font-size: 0.97rem; }
+
+    .text-link {
+      font-family: var(--fm); font-size: 0.72rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gold); border-bottom: 1px solid currentColor;
+      padding-bottom: 2px; align-self: flex-start;
+      transition: color .2s; margin-top: 0.5rem;
+    }
+    .text-link:hover { color: var(--rose); }
+
+    /* ── FOOTER ── */
+    footer { background: #0e1517; padding: 2.5rem 2.5rem 1.5rem; border-top: 1px solid rgba(230,218,218,0.06); }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(230,218,218,0.06); }
+    .footer-name { font-family: var(--fd); font-size: 0.95rem; color: var(--rose); display: block; margin-bottom: 0.2rem; }
+    .footer-sub { font-family: var(--fm); font-size: 0.68rem; color: var(--dim); }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a { font-family: var(--fm); font-size: 0.7rem; color: var(--dim); transition: color .2s; }
+    .footer-links a:hover { color: var(--rose); }
+    .footer-bottom { max-width: var(--max); margin: 1.25rem auto 0; font-family: var(--fm); font-size: 0.62rem; color: rgba(230,218,218,0.18); text-align: center; }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: rgba(20,28,30,0.98); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(230,218,218,0.08); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: block; }
+      .page-header { padding: 3rem 1.5rem 2.5rem; }
+      .anecdotes-container { padding: 3rem 1.5rem 4rem; }
+      .post-card.featured { grid-template-columns: 1fr; }
+      .post-card.featured .post-img { aspect-ratio: 16/9; min-height: unset; }
+      .post-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem 1.5rem; }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
 
   <nav id="navbar">
-    <div class="nav-name">Sandeep Kumar</div>
-    <ul class="nav-links">
+    <span class="nav-name">Sandeep Kumar</span>
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
-      <li><a href="fieldwork.html">Field Work</a></li>
-      <li><a href="Cv.html">CV</a></li>
+      <li><a href="fieldwork.html">Projects</a></li>
+      <li><a href="publications.html">Publications</a></li>
       <li><a href="anecdotes.html" class="active">Anecdotes</a></li>
       <li><a href="lens.html">Creative</a></li>
+      <li><a href="cv.html">CV</a></li>
     </ul>
-    <div class="nav-toggle" id="navToggle">☰</div>
+    <span class="hamburger" id="ham">☰</span>
   </nav>
 
-  <header class="page-header">
-    <div class="section-label">Field Notes</div>
-    <h1>Anecdotes from the <em>forest floor</em></h1>
-    <p class="page-header-sub">
-      What field ecology feels like from the inside — the observations, 
-      the surprises, and the questions that don't fit neatly into a methods section.
-    </p>
-  </header>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <p class="page-eyebrow">Field Notes</p>
+      <h1 class="page-title">Anecdotes from the <em>forest floor</em></h1>
+      <p class="page-desc">
+        What field ecology feels like from the inside — the observations,
+        the surprises, and the questions that don't fit neatly into a methods section.
+      </p>
+    </div>
+  </div>
 
-  <!-- Blog post list — Kavish style -->
+  <!-- POSTS -->
   <div class="anecdotes-container">
 
-    <!-- TEACHING NOTE: Each .post-card is one blog post entry.
-         To ADD a new post, copy one entire .post-card block and change the text.
-         Later, if you switch to GitHub Pages with Jekyll, each post becomes
-         a separate Markdown file and the site generates these cards automatically. -->
-
-    <article class="post-card featured">
+    <!-- FEATURED POST — large card -->
+    <article class="post-card featured reveal">
+      <!-- Replace .post-img-1 gradient with a real photo:
+           style="background-image: url('images/canopy.jpg')" -->
       <div class="post-img post-img-1"></div>
       <div class="post-content">
         <div class="post-meta">
@@ -50,17 +256,18 @@
         </div>
         <h2><a href="#">The Democracy of the Canopy</a></h2>
         <p class="post-excerpt">
-          The flock moved like a single organism — forty birds, twelve species, 
-          one collective intelligence weaving through the oak forest. 
+          The flock moved like a single organism — forty birds, twelve species,
+          one collective intelligence weaving through the oak forest.
           I had been watching for three hours when I first noticed who was actually leading...
         </p>
         <a href="#" class="text-link">Read the full note →</a>
       </div>
     </article>
 
+    <!-- SMALLER POST GRID -->
     <div class="post-grid">
 
-      <article class="post-card">
+      <article class="post-card reveal">
         <div class="post-img post-img-2"></div>
         <div class="post-content">
           <div class="post-meta">
@@ -69,14 +276,14 @@
           </div>
           <h2><a href="#">A morning with the Rufous Sibias</a></h2>
           <p class="post-excerpt">
-            They arrive before first light and vanish by nine. 
+            They arrive before first light and vanish by nine.
             In those two hours, they seem to govern the entire understorey...
           </p>
           <a href="#" class="text-link">Read →</a>
         </div>
       </article>
 
-      <article class="post-card">
+      <article class="post-card reveal">
         <div class="post-img post-img-3"></div>
         <div class="post-content">
           <div class="post-meta">
@@ -85,14 +292,14 @@
           </div>
           <h2><a href="#">What data cannot capture</a></h2>
           <p class="post-excerpt">
-            There are moments in the field that end up nowhere in your dataset. 
+            There are moments in the field that end up nowhere in your dataset.
             I've started keeping a second notebook for those...
           </p>
           <a href="#" class="text-link">Read →</a>
         </div>
       </article>
 
-      <article class="post-card">
+      <article class="post-card reveal">
         <div class="post-img post-img-4"></div>
         <div class="post-content">
           <div class="post-meta">
@@ -101,7 +308,7 @@
           </div>
           <h2><a href="#">On the patience of waiting</a></h2>
           <p class="post-excerpt">
-            Field ecology teaches you to sit still. Not just your body, 
+            Field ecology teaches you to sit still. Not just your body,
             but the part of your mind that needs things to happen on schedule...
           </p>
           <a href="#" class="text-link">Read →</a>
@@ -113,17 +320,39 @@
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-left">
-        <strong>Sandeep Kumar</strong>
-        <p>Ecologist · Naturalist · Photographer</p>
+      <div>
+        <span class="footer-name">Sandeep Kumar</span>
+        <span class="footer-sub">Ecologist · Naturalist · Photographer</span>
       </div>
       <div class="footer-links">
-        <a href="/cdn-cgi/l/email-protection#a7dec8d2d5e7c2cac6cecb89c4c8ca">Email</a>
-        <a href="#">eBird</a>
-        <a href="#">Instagram</a>
+        <a href="mailto:sk21ms053@iiserkol.ac.in">✉ Email</a>
+        <a href="https://ebird.org/profile/MTk1NzE3OQ/world" target="_blank">🐦 eBird</a>
+        <a href="https://www.instagram.com/ig_sandeep.3/" target="_blank">📷 Instagram</a>
+        <a href="https://x.com/IgnoramusNWords" target="_blank">𝕏 Twitter</a>
       </div>
     </div>
-    <div class="footer-bottom">© Sandeep Kumar · Built with curiosity · Hosted free on GitHub Pages.</div>
+    <p class="footer-bottom">Built with curiosity · Hosted free on GitHub Pages</p>
   </footer>
 
-  <script data-c
+  <script>
+    const ham = document.getElementById('ham');
+    const nl  = document.getElementById('navLinks');
+    ham.addEventListener('click', () => {
+      nl.classList.toggle('open');
+      ham.textContent = nl.classList.contains('open') ? '✕' : '☰';
+    });
+
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('on');
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.boxShadow =
+        scrollY > 40 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
+    });
+  </script>
+</body>
+</html>
