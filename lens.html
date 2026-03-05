@@ -1,492 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creative | Sandeep Kumar</title>
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap"
-    rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦥</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Betania+Patmos&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet" />
   <style>
     :root {
-      /* ── DESIGN SYSTEM ──────────────────────────────
-       3 fonts, used consistently everywhere:
-       --fd  Playfair Display → titles, headings, names, blockquotes
-       --fb  Source Serif 4  → body text, descriptions, paragraphs
-       --fm  DM Mono         → labels, nav, tags, dates, buttons, captions
-
-       Colours:
-       --rose   #e6dada  dusty rose — used as gradient start, accent
-       --teal   #274046  deep teal  — used as gradient end, dark base
-       --bg     #141c1e  near-black with teal undertone — all sections below hero
-       --surface #1c2729  slightly lighter for cards / bands
-       --text   #d8d0cc  warm off-white body text
-       --dim    #7a8c8e  muted teal-grey — labels, dates
-       --gold   #c4922a  accent — links, active states
-    ──────────────────────────────────────────────── */
-      --rose: #e6dada;
-      --teal: #274046;
-      --bg: #141c1e;
-      --surface: #1c2729;
-      --text: #d8d0cc;
-      --dim: #7a8c8e;
-      --gold: #c4922a;
       --fd: 'Playfair Display', Georgia, serif;
       --fb: 'Source Serif 4', Georgia, serif;
       --fm: 'DM Mono', monospace;
+      --rose:    #e6dada;
+      --teal:    #274046;
+      --bg:      #141c1e;
+      --surface: #1c2729;
+      --text:    #d8d0cc;
+      --dim:     #7a8c8e;
+      --gold:    #c4922a;
+      --nav: 60px;
       --max: 1200px;
-      --nav: 64px;
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--fb); font-weight: 300; line-height: 1.75; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--fb);
-      font-weight: 300;
-      line-height: 1.75;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
-
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
       height: var(--nav);
-      background: rgba(20, 28, 30, 0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(122, 140, 142, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: rgba(20,28,30,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(230,218,218,0.08);
+      display: flex; align-items: center; justify-content: space-between;
       padding: 0 2.5rem;
     }
-
-    .nav-name {
-      font-family: var(--fd);
-      font-size: 1.05rem;
-      color: var(--rose);
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.8rem;
-    }
-
+    .nav-name { font-family: var(--fd); font-size: 1rem; color: var(--rose); letter-spacing: 0.02em; }
+    .nav-links { list-style: none; display: flex; gap: 1.8rem; }
     .nav-links a {
-      font-family: var(--fm);
-      font-size: 0.74rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-family: var(--fm); font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--dim);
-      border-bottom: 1px solid transparent;
-      padding-bottom: 2px;
+      border-bottom: 1px solid transparent; padding-bottom: 2px;
       transition: color .2s, border-color .2s;
     }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-links a.active { color: var(--rose); border-bottom-color: var(--rose); }
+    .hamburger { display: none; cursor: pointer; font-size: 1.3rem; color: var(--dim); }
 
-    .nav-links a:hover {
-      color: var(--rose);
-    }
-
-    .nav-links a.active {
-      color: var(--gold);
-      border-bottom-color: var(--gold);
-    }
-
-    .hamburger {
-      display: none;
-      cursor: pointer;
-      font-size: 1.4rem;
-      color: var(--rose);
-    }
-
-    /* ── PAGE HEADER ── */
+    /* ── PAGE HEADER — same rose→teal gradient ── */
     .page-header {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 5rem 2.5rem 3rem;
+      padding: 5rem 2.5rem 3.5rem;
+      background: linear-gradient(160deg, #e6dada 0%, #b8a8b0 25%, #4a6068 60%, #274046 100%);
+      position: relative;
     }
+    .page-header::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+    .page-header-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 2; }
 
     .page-eyebrow {
-      font-family: var(--fm);
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 0.75rem;
+      font-family: var(--fm); font-size: 0.68rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(230,218,218,0.5); margin-bottom: 0.75rem;
     }
-
     .page-title {
       font-family: var(--fd);
       font-size: clamp(2rem, 4vw, 3rem);
-      background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-      line-height: 1.1;
+      color: #f5f0ee; font-weight: 400;
+      line-height: 1.1; margin-bottom: 1rem;
     }
+    .page-title em { font-style: italic; color: rgba(245,240,238,0.75); }
 
-    .page-title em {
-      font-style: italic;
-      background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* the one-line philosophy */
     .page-philosophy {
-      font-family: var(--fd);
-      font-size: 1.1rem;
-      font-style: italic;
-      color: var(--dim);
-      max-width: 560px;
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
-      border-left: 2px solid var(--gold);
+      font-family: var(--fd); font-size: 1.05rem;
+      font-style: italic; color: rgba(245,240,238,0.65);
+      max-width: 520px; line-height: 1.65;
+      border-left: 2px solid rgba(196,146,42,0.6);
       padding-left: 1rem;
     }
 
     /* ── FILTER TABS ── */
     .filter-bar {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 2.5rem 3rem;
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+      max-width: var(--max); margin: 0 auto;
+      padding: 2.5rem 2.5rem 2rem;
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
     }
-
     .filter-btn {
-      font-family: var(--fm);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-family: var(--fm); font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
       padding: 0.4rem 1rem;
-      border: 1px solid rgba(122, 140, 142, 0.2);
-      color: var(--dim);
-      background: transparent;
-      cursor: pointer;
-      transition: all .2s;
+      border: 1px solid rgba(230,218,218,0.1);
+      color: var(--dim); background: transparent;
+      cursor: pointer; transition: all .2s;
     }
-
-    .filter-btn:hover {
-      border-color: var(--dim);
-      color: var(--text);
-    }
-
-    .filter-btn.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #1e1e1e;
-    }
+    .filter-btn:hover { border-color: var(--dim); color: var(--text); }
+    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: #1e1e1e; }
 
     /* ── CHAPTER SECTIONS ── */
-    .chapter {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 2.5rem 5rem;
-    }
-
+    .chapter { max-width: var(--max); margin: 0 auto; padding: 0 2.5rem 5rem; }
     .chapter-header {
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(122, 140, 142, 0.2);
+      margin-bottom: 2rem; padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(230,218,218,0.06);
     }
-
     .chapter-num {
-      font-family: var(--fm);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 0.4rem;
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 0.4rem;
     }
-
     .chapter-title {
-      font-family: var(--fd);
-      font-size: 1.6rem;
-      color: var(--rose);
-      font-weight: 400;
-      margin-bottom: 0.5rem;
+      font-family: var(--fd); font-size: 1.6rem;
+      color: var(--rose); font-weight: 400; margin-bottom: 0.5rem;
     }
-
     .chapter-desc {
-      font-family: var(--fb);
-      font-size: 0.9rem;
-      color: var(--text);
-      line-height: 1.7;
-      max-width: 520px;
-      font-style: italic;
+      font-family: var(--fb); font-size: 0.9rem;
+      color: var(--text); line-height: 1.7;
+      max-width: 520px; font-style: italic;
     }
 
-    /* ── MASONRY PHOTO GRID ──
-       CSS columns give natural masonry layout — photos stack like bricks.
-       To add a photo: put an <img> inside a .photo-item div anywhere in .grid.
-       Tall photos and wide photos both work — the layout adapts automatically.
-    */
-    .grid {
-      columns: 3 280px;
-      /* 3 columns on desktop, collapses on mobile */
-      column-gap: 6px;
-    }
-
+    /* ── MASONRY GRID ── */
+    .grid { columns: 3 280px; column-gap: 6px; }
     .photo-item {
-      break-inside: avoid;
-      /* prevents a photo from splitting across columns */
-      margin-bottom: 6px;
-      position: relative;
-      overflow: hidden;
-      cursor: zoom-in;
+      break-inside: avoid; margin-bottom: 6px;
+      position: relative; overflow: hidden; cursor: zoom-in;
     }
-
-    .photo-item img {
-      transition: transform .4s ease, filter .4s ease;
-      filter: brightness(0.9);
-    }
-
-    .photo-item:hover img {
-      transform: scale(1.03);
-      filter: brightness(1);
-    }
-
-    /* caption on hover */
+    .photo-item img { transition: transform .4s ease, filter .4s ease; filter: brightness(0.9); }
+    .photo-item:hover img { transform: scale(1.03); filter: brightness(1); }
     .photo-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      position: absolute; bottom: 0; left: 0; right: 0;
       padding: 0.75rem 1rem;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
-      font-family: var(--fm);
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      opacity: 0;
-      transition: opacity .3s ease;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      font-family: var(--fm); font-size: 0.65rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      opacity: 0; transition: opacity .3s ease;
     }
+    .photo-item:hover .photo-caption { opacity: 1; }
 
-    .photo-item:hover .photo-caption {
-      opacity: 1;
-    }
-
-    /* ── PLACEHOLDER TILES ──
-       These are coloured boxes that stand in for your real photos.
-       REPLACING WITH REAL PHOTOS:
-       <div class="photo-item" data-category="wildlife">
-         <img src="your-photo.jpg" alt="brief description"/>
-         <div class="photo-caption">Rufous Sibia · Uttarakhand, 2025</div>
-       </div>
-
-       The data-category attribute controls which filter tab shows it:
-       data-category="wildlife"  → shows under Wildlife & Landscape
-       data-category="street"    → shows under Street
-       data-category="art"       → shows under Digital Art
-    */
-
-    /* placeholder colours — remove when adding real photos */
+    /* placeholder tiles */
     .ph {
       background: var(--surface);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--fm);
-      font-size: 0.65rem;
-      color: var(--dim);
-      letter-spacing: 0.1em;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fm); font-size: 0.65rem;
+      color: var(--dim); letter-spacing: 0.1em;
     }
-
-    .ph-tall {
-      height: 320px;
-    }
-
-    .ph-med {
-      height: 220px;
-    }
-
-    .ph-short {
-      height: 160px;
-    }
-
-    .ph-wide {
-      height: 200px;
-    }
+    .ph-tall  { height: 320px; }
+    .ph-med   { height: 220px; }
+    .ph-short { height: 160px; }
+    .ph-wide  { height: 200px; }
 
     /* ── LIGHTBOX ── */
     .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      background: rgba(0, 0, 0, 0.92);
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center; padding: 2rem;
     }
-
-    .lightbox.open {
-      display: flex;
-    }
-
-    .lightbox img {
-      max-height: 90vh;
-      max-width: 90vw;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-    }
-
+    .lightbox.open { display: flex; }
+    .lightbox img { max-height: 90vh; max-width: 90vw; width: auto; height: auto; object-fit: contain; }
     .lightbox-close {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 2rem;
-      color: var(--dim);
-      cursor: pointer;
-      line-height: 1;
-      transition: color .2s;
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-size: 2rem; color: var(--dim); cursor: pointer;
+      line-height: 1; transition: color .2s;
     }
-
-    .lightbox-close:hover {
-      color: var(--rose);
-    }
-
+    .lightbox-close:hover { color: var(--rose); }
     .lightbox-caption {
-      position: absolute;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--fm);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dim);
+      position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      font-family: var(--fm); font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);
     }
 
     /* ── FOOTER ── */
-    footer {
-      background: #0d1214;
-      color: var(--dim);
-      padding: 2rem 2.5rem;
-      border-top: 1px solid rgba(122, 140, 142, 0.1);
-    }
+    footer { background: #0e1517; padding: 2.5rem 2.5rem 1.5rem; border-top: 1px solid rgba(230,218,218,0.06); }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(230,218,218,0.06); }
+    .footer-name { font-family: var(--fd); font-size: 0.95rem; color: var(--rose); display: block; margin-bottom: 0.2rem; }
+    .footer-sub { font-family: var(--fm); font-size: 0.68rem; color: var(--dim); }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a { font-family: var(--fm); font-size: 0.7rem; color: var(--dim); transition: color .2s; }
+    .footer-links a:hover { color: var(--rose); }
+    .footer-bottom { max-width: var(--max); margin: 1.25rem auto 0; font-family: var(--fm); font-size: 0.62rem; color: rgba(230,218,218,0.18); text-align: center; }
 
-    .footer-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-left {
-      font-family: var(--fm);
-      font-size: 0.68rem;
-      letter-spacing: 0.05em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.25rem;
-    }
-
-    .footer-links a {
-      font-family: var(--fm);
-      font-size: 0.7rem;
-      color: var(--dim);
-      transition: color .2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--rose);
-    }
-
-    /* MOBILE */
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: var(--nav);
-        left: 0;
-        right: 0;
-        background: var(--bg);
-        flex-direction: column;
-        padding: 1.5rem 2rem;
-        gap: 1.2rem;
-        border-bottom: 1px solid rgba(122, 140, 142, 0.2);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      .page-header {
-        padding: 3rem 1.5rem 2rem;
-      }
-
-      .filter-bar {
-        padding: 0 1.5rem 2rem;
-      }
-
-      .chapter {
-        padding: 0 1.5rem 3.5rem;
-      }
-
-      .grid {
-        columns: 2 160px;
-      }
-
-      footer {
-        padding: 1.5rem;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
+      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: rgba(20,28,30,0.98); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(230,218,218,0.08); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: block; }
+      .page-header { padding: 3rem 1.5rem 2.5rem; }
+      .filter-bar, .chapter { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .grid { columns: 2 160px; }
+      footer { padding: 2rem 1.5rem 1.5rem; }
+      .footer-inner { flex-direction: column; }
     }
-
-    @media (max-width: 480px) {
-      .grid {
-        columns: 1;
-      }
-    }
+    @media (max-width: 480px) { .grid { columns: 1; } }
   </style>
 </head>
-
 <body>
 
   <nav id="navbar">
@@ -494,22 +207,24 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="fieldwork.html">Projects</a></li>
-      <li><a href="Cv.html">CV</a></li>
       <li><a href="publications.html">Publications</a></li>
-      <li><a href="lens.html" class="active">Creative</a></li>
       <li><a href="anecdotes.html">Anecdotes</a></li>
+      <li><a href="lens.html" class="active">Creative</a></li>
+      <li><a href="cv.html">CV</a></li>
     </ul>
     <span class="hamburger" id="ham">☰</span>
   </nav>
 
-  <!-- HEADER -->
+  <!-- PAGE HEADER -->
   <div class="page-header">
-    <p class="page-eyebrow">Archive · Photography &amp; Art</p>
-    <h1 class="page-title">Creat<em>ive</em></h1>
-    <p class="page-philosophy">
-      I stop when something makes me stop and observe.<br>
-      The camera is how I explain why and what!.
-    </p>
+    <div class="page-header-inner">
+      <p class="page-eyebrow">Archive · Photography &amp; Art</p>
+      <h1 class="page-title">Creat<em>ive</em></h1>
+      <p class="page-philosophy">
+        I stop when something makes me stop and observe.<br>
+        The camera is how I explain why and what.
+      </p>
+    </div>
   </div>
 
   <!-- FILTER TABS -->
@@ -520,9 +235,7 @@
     <button class="filter-btn" onclick="filter('art', this)">Digital Art</button>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       CHAPTER I — WILDLIFE & LANDSCAPE
-  ════════════════════════════════════════════ -->
+  <!-- CHAPTER I — WILDLIFE -->
   <div class="chapter" id="chapter-wildlife">
     <div class="chapter-header">
       <p class="chapter-num">Chapter I</p>
@@ -532,21 +245,7 @@
         These are the moments fieldwork gives you if you're paying attention.
       </p>
     </div>
-
-    <!--
-      HOW TO ADD YOUR WILDLIFE PHOTOS:
-      Replace each .ph placeholder div with a real .photo-item like this:
-
-      <div class="photo-item" data-category="wildlife">
-        <img src="your-bird-photo.jpg" alt="Rufous Sibia" loading="lazy"/>
-        <div class="photo-caption">Rufous Sibia · Uttarakhand, 2025</div>
-      </div>
-
-      Tall portrait photos go well in the first column.
-      You can mix tall and short freely — the masonry layout handles it.
-    -->
     <div class="grid" id="grid-wildlife">
-
       <div class="photo-item" data-category="wildlife">
         <div class="ph ph-tall">[ your photo ]</div>
         <div class="photo-caption">Mixed flock · Uttarakhand, 2025</div>
@@ -583,13 +282,10 @@
         <div class="ph ph-med">[ your photo ]</div>
         <div class="photo-caption">Foraging behaviour</div>
       </div>
-
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       CHAPTER II — STREET
-  ════════════════════════════════════════════ -->
+  <!-- CHAPTER II — STREET -->
   <div class="chapter" id="chapter-street">
     <div class="chapter-header">
       <p class="chapter-num">Chapter II</p>
@@ -600,40 +296,35 @@
         and for a moment it means something.
       </p>
     </div>
-
     <div class="grid" id="grid-street">
-
       <div class="photo-item" data-category="street">
-        <div class="ph ph-tall" style="background:#222">[ your photo ]</div>
+        <div class="ph ph-tall" style="background:#1e2426">[ your photo ]</div>
         <div class="photo-caption">Jharkhand street, 2024</div>
       </div>
       <div class="photo-item" data-category="street">
-        <div class="ph ph-short" style="background:#222">[ your photo ]</div>
+        <div class="ph ph-short" style="background:#1e2426">[ your photo ]</div>
         <div class="photo-caption">Light and shadow</div>
       </div>
       <div class="photo-item" data-category="street">
-        <div class="ph ph-med" style="background:#222">[ your photo ]</div>
+        <div class="ph ph-med" style="background:#1e2426">[ your photo ]</div>
         <div class="photo-caption">Someone passing by</div>
       </div>
       <div class="photo-item" data-category="street">
-        <div class="ph ph-wide" style="background:#222">[ your photo ]</div>
+        <div class="ph ph-wide" style="background:#1e2426">[ your photo ]</div>
         <div class="photo-caption">Evening market</div>
       </div>
       <div class="photo-item" data-category="street">
-        <div class="ph ph-tall" style="background:#222">[ your photo ]</div>
+        <div class="ph ph-tall" style="background:#1e2426">[ your photo ]</div>
         <div class="photo-caption">Urban geometry</div>
       </div>
       <div class="photo-item" data-category="street">
-        <div class="ph ph-med" style="background:#222">[ your photo ]</div>
+        <div class="ph ph-med" style="background:#1e2426">[ your photo ]</div>
         <div class="photo-caption">Faces I didn't know</div>
       </div>
-
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       CHAPTER III — DIGITAL ART
-  ════════════════════════════════════════════ -->
+  <!-- CHAPTER III — DIGITAL ART -->
   <div class="chapter" id="chapter-art">
     <div class="chapter-header">
       <p class="chapter-num">Chapter III</p>
@@ -643,30 +334,27 @@
         These are things I couldn't photograph, so I made them instead.
       </p>
     </div>
-
     <div class="grid" id="grid-art">
-
       <div class="photo-item" data-category="art">
-        <div class="ph ph-tall" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="ph ph-tall" style="background:#161c2e">[ your artwork ]</div>
         <div class="photo-caption">Digital piece, 2024</div>
       </div>
       <div class="photo-item" data-category="art">
-        <div class="ph ph-med" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="ph ph-med" style="background:#161c2e">[ your artwork ]</div>
         <div class="photo-caption">Untitled</div>
       </div>
       <div class="photo-item" data-category="art">
-        <div class="ph ph-short" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="ph ph-short" style="background:#161c2e">[ your artwork ]</div>
         <div class="photo-caption">Concept study</div>
       </div>
       <div class="photo-item" data-category="art">
-        <div class="ph ph-wide" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="ph ph-wide" style="background:#161c2e">[ your artwork ]</div>
         <div class="photo-caption">Species illustration</div>
       </div>
       <div class="photo-item" data-category="art">
-        <div class="ph ph-tall" style="background:#1a1a2e">[ your artwork ]</div>
+        <div class="ph ph-tall" style="background:#161c2e">[ your artwork ]</div>
         <div class="photo-caption">Field sketch, digital</div>
       </div>
-
     </div>
   </div>
 
@@ -677,10 +365,12 @@
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-left">Sandeep Kumar · Ecologist · Naturalist · Photographer</div>
+      <div>
+        <span class="footer-name">Sandeep Kumar</span>
+        <span class="footer-sub">Ecologist · Naturalist · Photographer</span>
+      </div>
       <div class="footer-links">
         <a href="mailto:sk21ms053@iiserkol.ac.in">✉ Email</a>
         <a href="https://ebird.org/profile/MTk1NzE3OQ/world" target="_blank">🐦 eBird</a>
@@ -688,53 +378,36 @@
         <a href="https://x.com/IgnoramusNWords" target="_blank">𝕏 Twitter</a>
       </div>
     </div>
+    <p class="footer-bottom">Built with curiosity · Hosted free on GitHub Pages</p>
   </footer>
 
   <script>
-    // ── Mobile nav ──
     const ham = document.getElementById('ham');
-    const nl = document.getElementById('navLinks');
+    const nl  = document.getElementById('navLinks');
     ham.addEventListener('click', () => {
       nl.classList.toggle('open');
       ham.textContent = nl.classList.contains('open') ? '✕' : '☰';
     });
 
-    // ── Filter tabs ──
-    // When you click a filter, it hides photos that don't match
-    // by checking the data-category attribute on each .photo-item
     function filter(cat, btn) {
-      // update active button
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      // show/hide items
       document.querySelectorAll('.photo-item').forEach(item => {
-        const match = cat === 'all' || item.dataset.category === cat;
-        item.style.display = match ? 'block' : 'none';
+        item.style.display = (cat === 'all' || item.dataset.category === cat) ? 'block' : 'none';
       });
-
-      // show/hide chapter headers
       ['wildlife', 'street', 'art'].forEach(c => {
-        const chapter = document.getElementById('chapter-' + c);
-        if (cat === 'all' || cat === c) {
-          chapter.style.display = 'block';
-        } else {
-          chapter.style.display = 'none';
-        }
+        document.getElementById('chapter-' + c).style.display =
+          (cat === 'all' || cat === c) ? 'block' : 'none';
       });
     }
 
-    // ── Lightbox ──
-    // Clicking any photo opens a full-screen lightbox
-    // Works automatically for real <img> tags inside .photo-item
     document.querySelectorAll('.photo-item').forEach(item => {
       item.addEventListener('click', () => {
         const img = item.querySelector('img');
-        if (!img) return; // skip placeholders
+        if (!img) return;
         const caption = item.querySelector('.photo-caption');
         document.getElementById('lightbox-img').src = img.src;
-        document.getElementById('lightbox-caption').textContent =
-          caption ? caption.textContent : '';
+        document.getElementById('lightbox-caption').textContent = caption ? caption.textContent : '';
         document.getElementById('lightbox').classList.add('open');
         document.body.style.overflow = 'hidden';
       });
@@ -751,12 +424,10 @@
       if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') });
     });
 
-    // Nav shadow
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').style.boxShadow =
-        scrollY > 40 ? '0 2px 18px rgba(0,0,0,0.3)' : 'none';
+        scrollY > 40 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
     });
   </script>
 </body>
-
 </html>
