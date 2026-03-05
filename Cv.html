@@ -3,86 +3,102 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CV — Sandeep Kumar</title>
+  <title>CV | Sandeep Kumar</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Betania+Patmos&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --forest: #2C3B2D; --earth: #5C4A32; --cream: #F4F0E6;
-      --ink: #1E1E1E; --mist: #9CA89C; --gold: #C4922A;
       --fd: 'Playfair Display', Georgia, serif;
+      --fb: 'Source Serif 4', Georgia, serif;
       --fm: 'DM Mono', monospace;
-      --nav: 64px;
+      --rose:    #e6dada;
+      --teal:    #274046;
+      --bg:      #141c1e;
+      --surface: #1c2729;
+      --text:    #d8d0cc;
+      --dim:     #7a8c8e;
+      --gold:    #c4922a;
+      --nav: 60px;
+      --max: 1100px;
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--cream); font-family: var(--fm); overflow-x: hidden; height: 100vh; display: flex; flex-direction: column; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--fb); font-weight: 300;
+      line-height: 1.75; overflow-x: hidden;
+      height: 100vh; display: flex; flex-direction: column;
+    }
     a { color: inherit; text-decoration: none; }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100; height: var(--nav);
-      background: rgba(244,240,230,0.96); backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(92,74,50,0.15);
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav);
+      background: rgba(20,28,30,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(230,218,218,0.08);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem; flex-shrink: 0;
+      padding: 0 2.5rem;
+      flex-shrink: 0;
     }
-    .nav-name { font-family: var(--fd); font-size: 1.05rem; color: var(--forest); }
+    .nav-name { font-family: var(--fd); font-size: 1rem; color: var(--rose); letter-spacing: 0.02em; }
     .nav-links { list-style: none; display: flex; gap: 1.8rem; }
     .nav-links a {
-      font-family: var(--fm); font-size: 0.74rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--earth);
+      font-family: var(--fm); font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim);
       border-bottom: 1px solid transparent; padding-bottom: 2px;
       transition: color .2s, border-color .2s;
     }
-    .nav-links a:hover { color: var(--forest); }
-    .nav-links a.active { color: var(--forest); border-bottom-color: var(--forest); }
-    .hamburger { display: none; cursor: pointer; font-size: 1.4rem; color: var(--forest); }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-links a.active { color: var(--rose); border-bottom-color: var(--rose); }
+    .hamburger { display: none; cursor: pointer; font-size: 1.3rem; color: var(--dim); }
 
-    /* SLIM HEADER BAR above the PDF */
+    /* ── CV BAR (slim bar above PDF) ── */
     .cv-bar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.9rem 2.5rem;
-      border-bottom: 1px solid rgba(92,74,50,0.12);
-      background: var(--cream);
+      border-bottom: 1px solid rgba(230,218,218,0.08);
+      background: var(--surface);
       flex-shrink: 0;
     }
     .cv-bar-title {
       font-family: var(--fd); font-size: 1rem;
-      color: var(--forest); font-style: italic;
+      color: var(--rose); font-style: italic;
     }
     .cv-bar-right { display: flex; align-items: center; gap: 1.5rem; }
     .cv-updated {
-      font-size: 0.68rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--mist);
+      font-family: var(--fm); font-size: 0.68rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--dim);
     }
     .btn-dl {
-      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--forest); border: 1px solid rgba(44,59,45,0.4);
-      padding: 0.35rem 0.9rem; transition: all .2s;
+      font-family: var(--fm); font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--rose);
+      border: 1px solid rgba(230,218,218,0.25);
+      padding: 0.35rem 0.9rem;
+      transition: all .2s;
     }
-    .btn-dl:hover { background: var(--forest); color: var(--cream); }
+    .btn-dl:hover { background: var(--rose); color: var(--teal); }
 
-    /* PDF EMBED — fills remaining viewport height */
-    /*
-      HOW TO ADD YOUR CV PDF:
-      1. Add your CV PDF file to your GitHub repo (e.g. sandeep-cv.pdf)
-      2. Change the <embed src="#"> to <embed src="sandeep-cv.pdf">
-      3. Also update the download button href below
-      That's it. Whenever you update the PDF, just replace the file in GitHub.
-    */
+    /* ── PDF FRAME — fills remaining height ── */
     .pdf-frame {
       flex: 1;
       width: 100%;
       border: none;
       display: block;
-      background: #e8e4e0;
+      background: var(--bg);
     }
 
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: var(--cream); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(92,74,50,0.15); }
+      .nav-links { display: none; position: absolute; top: var(--nav); left: 0; right: 0; background: rgba(20,28,30,0.98); flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(230,218,218,0.08); }
       .nav-links.open { display: flex; }
       .hamburger { display: block; }
-      .cv-bar { padding: 0.75rem 1.5rem; }
+      .cv-bar { padding: 0.75rem 1.5rem; flex-wrap: wrap; gap: 0.75rem; }
     }
   </style>
 </head>
@@ -92,11 +108,10 @@
     <span class="nav-name">Sandeep Kumar</span>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="fieldwork.html">Field Work</a></li>
+      <li><a href="fieldwork.html">Projects</a></li>
       <li><a href="publications.html">Publications</a></li>
       <li><a href="anecdotes.html">Anecdotes</a></li>
-      <li><a href="lens.html">Through the Lens</a></li>
+      <li><a href="lens.html">Creative</a></li>
       <li><a href="cv.html" class="active">CV</a></li>
     </ul>
     <span class="hamburger" id="ham">☰</span>
@@ -107,19 +122,11 @@
     <span class="cv-bar-title">Curriculum Vitae — Sandeep Kumar</span>
     <div class="cv-bar-right">
       <span class="cv-updated">Last updated: May 2025</span>
-      <!-- change href to your actual PDF filename once uploaded -->
       <a href="https://drive.google.com/uc?export=download&id=1u0bJ4ztAMtoRDEp6xbSfSKDs___6z-tJ" class="btn-dl">↓ Download</a>
     </div>
   </div>
 
-  <!--
-    HOW TO SET THIS UP — 3 steps:
-    1. Upload your CV PDF to Google Drive
-    2. Right-click → Share → "Anyone with the link can view"
-    3. Copy the share link:  https://drive.google.com/file/d/XXXXXXXXXXXXXXXX/view
-    4. Paste just the ID (XXXXXXXXXXXXXXXX) in place of YOUR_FILE_ID below — in both places
-    Works on desktop and mobile. To update CV: replace the file in Drive, embed auto-updates.
-  -->
+  <!-- PDF embed via Google Drive -->
   <iframe
     class="pdf-frame"
     src="https://drive.google.com/file/d/1u0bJ4ztAMtoRDEp6xbSfSKDs___6z-tJ/preview"
